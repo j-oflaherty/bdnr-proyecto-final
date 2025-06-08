@@ -1,8 +1,8 @@
 import json
 import os
 
+import bs4
 import scrapy
-from bs4 import BeautifulSoup
 from loguru import logger
 from scrapy.http.response import Response
 
@@ -65,7 +65,7 @@ class ColibriSpider(scrapy.Spider):
     }
 
     def parse(self, response: Response):
-        soup = BeautifulSoup(response.text, "html.parser")
+        soup = bs4.BeautifulSoup(response.text, "html.parser")
         collections = soup.find_all("div", class_="list-group-item")
         if len(collections) > 0:
             for collection in collections:
@@ -99,12 +99,26 @@ class ColibriSpider(scrapy.Spider):
                 )
 
     def parse_document(self, response: Response):
-        soup = BeautifulSoup(response.text, "html.parser")
+        soup = bs4.BeautifulSoup(response.text, "html.parser")
 
         collection_path = [
             link.text.strip()
             for link in soup.find_all("a", attrs={"name": "coleccion_cita"})
         ]
+        obtained_title_row = soup.find(
+            "td",
+            class_="metadataFieldLabel",
+            string=lambda text: "obtenido" in text.lower()
+            or "obtained" in text.lower(),
+        )
+        if obtained_title_row:
+            obtained_title = [
+                str(t)
+                for t in obtained_title_row.parent.find_all("td")[1].contents
+                if not isinstance(t, bs4.element.Tag)
+            ]
+        else:
+            obtained_title = None
 
         yield {
             "title": response.xpath('//meta[@name="DC.title"]/@content').get(),
@@ -135,4 +149,5 @@ class ColibriSpider(scrapy.Spider):
             ).getall(),
             "collection_path": collection_path,
             "source": response.url,
+            "obtained_title": obtained_title,
         }

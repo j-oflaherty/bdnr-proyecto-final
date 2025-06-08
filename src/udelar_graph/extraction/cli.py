@@ -1,7 +1,8 @@
-import typer as ty
-from typer import Typer
+from pathlib import Path
 
-app = Typer(
+import typer
+
+app = typer.Typer(
     name="Udelar Graph data extraction",
     help="Comandos para la extracción de datos para el proyecto.",
     no_args_is_help=True,
@@ -16,7 +17,7 @@ def crawl_colibri():
 
         from .colibri import ColibriSpider
     except ImportError:
-        ty.secho(
+        typer.secho(
             "Run `uv sync --group crawlers` to install the necessary "
             "dependencies for this operation"
         )
