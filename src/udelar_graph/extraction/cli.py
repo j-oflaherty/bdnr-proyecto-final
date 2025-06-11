@@ -12,16 +12,20 @@ app = typer.Typer(
 
 @app.command("colibri", help="Crawlear proyectos de colibri")
 def crawl_colibri():
-    try:
-        from scrapy.crawler import CrawlerProcess
+    from scrapy.crawler import CrawlerProcess
 
-        from .colibri import ColibriSpider
-    except ImportError:
-        typer.secho(
-            "Run `uv sync --group crawlers` to install the necessary "
-            "dependencies for this operation"
-        )
-        exit(1)
+    from .colibri import ColibriSpider
+
+    # try:
+    #     from scrapy.crawler import CrawlerProcess
+
+    #     from .colibri import ColibriSpider
+    # except ImportError:
+    #     typer.secho(
+    #         "Run `uv sync --extra crawlers` to install the necessary "
+    #         "dependencies for this operation"
+    #     )
+    #     exit(1)
 
     process = CrawlerProcess()
     process.crawl(ColibriSpider)
