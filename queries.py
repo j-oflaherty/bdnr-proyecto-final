@@ -1,14 +1,16 @@
 # Basic query to retrieve all the nodes in the neo4j graph: use CYPHER syntax
+# %%
 from neo4j import GraphDatabase
 
 
+# %%
 class UdegraphQueries:
     def __init__(self):
-        # init connection to the Neo4j database
         self.driver = GraphDatabase.driver(
             "bolt://localhost:7687", auth=("neo4j", "password")
         )
 
+    # Basic Queries
     def get_all_nodes_query(self):
         return """
         MATCH (n)
@@ -19,6 +21,7 @@ class UdegraphQueries:
         return """
         MATCH (p:Person)
         RETURN p
+        LIMIT 3
         """
 
     def get_all_works_query(self):
@@ -28,22 +31,32 @@ class UdegraphQueries:
         LIMIT 1
         """
 
+    def get_person_works_query(self, person_name):
+        return """
+        MATCH (p:Person {normalized_name: $person_name})-[:AUTHOR_OF]->(w:Work)
+        RETURN w
+        """
+
+    # Queries for specific tasks
+    # 1. Person with most works
     def get_person_with_most_works_query(self):
         return """
-        MATCH (p:Person)-[:AUTHOR_OF]->(w:Work)
+        MATCH (p:Person)-[:AUTHOR_OF | CONTRIBUTOR_OF]->(w:Work)
         RETURN p, COUNT(w) AS works_count
         ORDER BY works_count DESC
         LIMIT 1
         """
 
+    # 2. Work with most authors
     def get_works_with_most_authors_query(self):
         return """
-        MATCH (w:Work)<-[:AUTHOR_OF]-(p:Person)
+        MATCH (w:Work)<-[:AUTHOR_OF | CONTRIBUTOR_OF]-(p:Person)
         RETURN w, COUNT(p) AS authors_count
         ORDER BY authors_count DESC
         LIMIT 1
         """
 
+    # 3. Person with most tutored students
     def get_person_with_most_tutored_students_query(self):
         return """
         MATCH (p:Person)-[:CONTRIBUTOR_OF]->(w:Work)<-[:AUTHOR_OF]-(a:Person)
@@ -52,7 +65,7 @@ class UdegraphQueries:
         LIMIT 1
         """
 
-    # Person with most coauthors in all its works
+    # 4. Person with most coauthors
     def get_person_with_most_coauthors_query(self):
         return """
         MATCH (p:Person)-[:AUTHOR_OF]->(w:Work)<-[:AUTHOR_OF]-(coauthor:Person)
@@ -62,7 +75,7 @@ class UdegraphQueries:
         LIMIT 1
         """
 
-    # Person with lowest distance to every other person
+    # 5. Person with lowest distance to everyone
     def get_person_with_lowest_distance_query(self):
         return """
         MATCH (p:Person)
@@ -72,18 +85,109 @@ class UdegraphQueries:
         LIMIT 1
         """
 
+    # 6. Shortest path between two people
+    def get_shortest_path_between_people_query(self, person1, person2):
+        return """
+        MATCH (p1:Person {normalized_name: $person1}), (p2:Person {normalized_name: $person2})
+        MATCH path = shortestPath((p1)-[:AUTHOR_OF|CONTRIBUTOR_OF*]-(p2))
+        RETURN path
+        """  # noqa: E501
+
     def close(self):
         if self.driver is not None:
             self.driver.close()
 
 
-# main to run query
 if __name__ == "__main__":
     query = UdegraphQueries()
 
     with query.driver.session() as session:
+        # 1. Person with most works
+        print("🔹 Person with the most works:")
+        result = session.run(query.get_person_with_most_works_query())
+        for record in result:
+            person = record["p"]
+            name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
+            print(f"  Name: {name}")
+            print(f"  Number of works: {record['works_count']}")
+        print()
+
+        # 2. Work with most authors
+        print("🔹 Work with the most authors:")
+        result = session.run(query.get_works_with_most_authors_query())
+        for record in result:
+            work = record["w"]
+            title = work.get("title", work.get("normalized_title", "Unknown"))
+            print(f"  Title: {title}")
+            print(f"  Number of authors: {record['authors_count']}")
+            if "abstract" in work:
+                print(f"  Abstract: {work['abstract']}")
+        print()
+
+        # 3. Person with most tutored students
+        print("🔹 Person with the most tutored students:")
+        result = session.run(query.get_person_with_most_tutored_students_query())
+        for record in result:
+            person = record["p"]
+            name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
+            print(f"  Name: {name}")
+            print(f"  Number of tutored students: {record['students_count']}")
+        print()
+
+        # 4. Person with most coauthors
+        print("🔹 Person with the most coauthors:")
+        result = session.run(query.get_person_with_most_coauthors_query())
+        for record in result:
+            person = record["p"]
+            name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
+            print(f"  Name: {name}")
+            print(f"  Number of coauthors: {record['coauthors_count']}")
+        print()
+
+        # 5. Person with lowest distance
+        print("🔹 Person with the lowest distance to everyone:")
         result = session.run(query.get_person_with_lowest_distance_query())
         for record in result:
-            print(record)
+            person = record["p"]
+            name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
+            print(f"  Name: {name}")
+            print(f"  Distance: {record['distance']}")
+        print()
 
-    query.close()
+        # 5. Path between two people: Graciana Castro and Julian O'Flaherty
+        person1 = "castro_graciana"
+        person2 = "etcheverry_lorena"
+        print(f"🔹 Shortest path between {person1} and {person2}:")
+        result = session.run(
+            query.get_shortest_path_between_people_query(person1, person2),
+            {"person1": person1, "person2": person2},
+        )
+        for record in result:
+            path = record["path"]
+            print(f"  Path: {path}")
+        print()
+
+        # 6. Get works by a specific person
+        person_name = "castro_graciana"
+        print(f"🔹 Works by {person_name}:")
+        result = session.run(
+            query.get_person_works_query(person_name), {"person_name": person_name}
+        )
+        for record in result:
+            work = record["w"]
+            title = work.get("title", work.get("normalized_title", "Unknown"))
+            print(f"  Title: {title}")
+            if "abstract" in work:
+                print(f"  Abstract: {work['abstract']}")
+        print()
+
+        # 7. Get all people
+        print("🔹 All people in the database:")
+        result = session.run(query.get_all_people_query())
+        for record in result:
+            person = record["p"]
+            print(f"{person}")
+
+        print()
+
+        query.close()
