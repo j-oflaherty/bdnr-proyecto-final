@@ -9,6 +9,7 @@ dependencies = [
     "ipdb>=0.13.13",
     "loguru>=0.7.3",
     "neo4j>=5.28.1",
+    "openai>=1.88.0",
     "polars>=1.30.0",
     "pydantic>=2.11.5",
     "python-levenshtein>=0.27.1",
