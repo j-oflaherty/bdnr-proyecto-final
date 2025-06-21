@@ -86,13 +86,11 @@ def get_work_types(data: pl.DataFrame) -> list[tuple[Work, WorkType]]:
     ]
 
 
-def get_work_keywords(data: pl.DataFrame) -> list[tuple[Work, WorkKeyword]]:
-    return [
-        (
-            Work(normalized_title=row["normalized_title"]),
-            WorkKeyword(keyword=row["keyword"]),
-        )
-        for row in data.select(
+def get_work_keywords(
+    data: pl.DataFrame, excluded_keyworks: set[str] = set()
+) -> list[tuple[Work, WorkKeyword]]:
+    keywords_df = (
+        data.select(
             pl.col("normalized_title"),
             pl.col("keywords").list[0].str.split(";").alias("keyword"),
         )
@@ -100,9 +98,21 @@ def get_work_keywords(data: pl.DataFrame) -> list[tuple[Work, WorkKeyword]]:
         .with_columns(
             keyword=pl.col("keyword")
             .str.strip_chars()
+            .replace(".", "")
             .map_elements(unidecode, return_dtype=pl.String)
+            .str.to_lowercase()
         )
-        .iter_rows(named=True)
+    )
+    if excluded_keyworks:
+        keywords_df = keywords_df.filter(
+            pl.col("keyword").is_in(excluded_keyworks).not_()
+        )
+    return [
+        (
+            Work(normalized_title=row["normalized_title"]),
+            WorkKeyword(keyword=row["keyword"]),
+        )
+        for row in keywords_df.iter_rows(named=True)
     ]
 
 
@@ -117,6 +127,8 @@ def populate_graph_colibri(
     )
 
     people, people_name_mapping = get_people_list(data)
+    with open("data/colibri_people.json", "w") as f:
+        json.dump([p.model_dump(mode="json") for p in people], f)
 
     works = get_works(data)
 
@@ -128,7 +140,8 @@ def populate_graph_colibri(
     )
 
     work_types = get_work_types(data)
-    work_keywords = get_work_keywords(data)
+    work_types_string = {wt[1].type for wt in work_types}
+    work_keywords = get_work_keywords(data, work_types_string)
 
     logger.info(f"Creating {len(people)} people")
     repository.create_person_batch(people)

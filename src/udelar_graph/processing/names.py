@@ -265,7 +265,7 @@ def get_people_list(df: pl.DataFrame) -> tuple[list[Person], dict[str, str]]:
         if name_parsed is None:
             raise ValueError(f"Failed to parse name: {shorter_name}")
 
-        normalized_name = f"{name_parsed['surnames_normalized']}_{name_parsed['first_names_normalized']}"
+        normalized_name = f"{name_parsed['first_names_normalized']}_{name_parsed['surnames_normalized']}"
         for name in name_set:
             people_to_nname_mapping[name] = normalized_name
         people.append(Person(normalized_name=normalized_name, aliases=list(name_set)))
