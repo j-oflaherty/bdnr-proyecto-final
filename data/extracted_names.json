@@ -1,134 +1,134 @@
 {
     "diseno_y_urbanismo._instituto_de_tecnologias._departamento_de_ambiente_construido._area_de_clima_y_confort_universidad_de_la_republica_(uruguay)._facultad_de_arquitectura": {
-        "surnames": "",
-        "first_names": "",
-        "institution": "Universidad de la Rep\u00fablica",
-        "department": "Facultad de Arquitectura, Dise\u00f1o y Urbanismo, Instituto de Tecnolog\u00edas, Departamento de Ambiente Construido, \u00c1rea de Clima y Confort",
-        "person": false
+        "surnames": "D\u00edaz Cuadro",
+        "first_names": "Christian Andr\u00e9s",
+        "institution": null,
+        "department": null,
+        "person": true
     },
     "univesidad_de_la_republica_(uruguay)._facultad_de_ingenieria.instituto_de_mecanica_de_los_fluidos_e_ingenieria_ambiental_gutierrez_alejandro": {
-        "surnames": "Guti\u00e9rrez",
-        "first_names": "Alejandro",
-        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
-        "department": "Facultad de Ingenier\u00eda. Instituto de Mec\u00e1nica de los Fluidos e Ingenier\u00eda Ambiental",
+        "surnames": "Pena Vergara",
+        "first_names": "Gabriel",
+        "institution": null,
+        "department": null,
         "person": true
     },
     "univesidad_de_la_republica_(uruguay)._facultad_de_ingenieria.instituto_de_mecanica_de_los_fluidos_e_ingenieria_ambiental_almeida_everton_de": {
-        "surnames": "Almeida de",
-        "first_names": "Everton",
-        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
-        "department": "Facultad de Ingenier\u00eda. Instituto de Mec\u00e1nica de los Fluidos e Ingenier\u00eda Ambiental",
+        "surnames": "Flores-Guridi",
+        "first_names": "Pablo",
+        "institution": null,
+        "department": null,
         "person": true
     },
     "univesidad_de_la_republica_(uruguay)._facultad_de_ingenieria.instituto_de_mecanica_de_los_fluidos_e_ingenieria_ambiental_porrini_claudio": {
-        "surnames": "Porrini",
-        "first_names": "Claudio",
-        "institution": "Universidad de la Rep\u00fablica",
-        "department": "Facultad de Ingenier\u00eda. Instituto de Mec\u00e1nica de los Fluidos e Ingenier\u00eda Ambiental",
+        "surnames": "Rodr\u00edguez",
+        "first_names": "Fernanda",
+        "institution": null,
+        "department": null,
         "person": true
     },
     "national_research_council.cnr-_stems_(italy)._science_and_technology_institute_for_sustainable_energy_and_mobility._merola_simona_silvia": {
-        "surnames": "Merola",
-        "first_names": "Simona Silvia",
-        "institution": "National Research Council.CNR- STEMS (Italy)",
-        "department": "Science and Technology Institute for Sustainable Energy and Mobility",
-        "person": true
-    },
-    "univesidad_de_la_republica_(uruguay)._facultad_de_ingenieria.instituto_de_mecanica_de_los_fluidos_e_ingenieria_ambiental_cazes_gabriel": {
-        "surnames": "Cazes",
-        "first_names": "Gabriel",
-        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
-        "department": "Facultad de Ingenier\u00eda. Instituto de Mec\u00e1nica de los Fluidos e Ingenier\u00eda Ambiental",
-        "person": true
-    },
-    "univeresidad_de_la_republica_(uruguay)._facultad_de_ingenieria._instituto_de_ingenieria_electrica_friss_de_kereki_juan_andres": {
-        "surnames": "de Kereki",
-        "first_names": "Juan Andr\u00e9s",
-        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
-        "department": "Facultad de Ingenier\u00eda. Instituto de Ingenier\u00eda El\u00e9ctrica",
-        "person": true
-    },
-    "national_institute_of_amazonian_research_(brasil)._bioprospection_and_biotechnology_laboratory._nunez_cecilia_veronica": {
-        "surnames": "Nunez",
-        "first_names": "Cecilia Veronica",
-        "institution": "National Institute of Amazonian Research (Brasil)",
-        "department": "Bioprospection and Biotechnology Laboratory",
-        "person": true
-    },
-    "uruguay._ministerio_de_educacion_y_cultura._instituto_de_investigaciones_biologicas_clemente_estable._caputi_angel": {
-        "surnames": "Caputi",
-        "first_names": "\u00c1ngel",
-        "institution": "Ministerio de Educaci\u00f3n y Cultura",
-        "department": "Instituto de Investigaciones Biol\u00f3gicas Clemente Estable",
-        "person": true
-    },
-    "univeresidad_de_la_republica_(uruguay)._facultad_de_ingenieria._instituto_de_ingenieria_electrica_bugna_sebastian": {
-        "surnames": "Bugna",
-        "first_names": "Sebasti\u00e1n",
-        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
-        "department": "Facultad de Ingenier\u00eda. Instituto de Ingenier\u00eda El\u00e9ctrica",
-        "person": true
-    },
-    "ecole_normale_superieure_paris-saclay._centre_for_mathematics_and_their_applications_grompone_von_gioi_rafael": {
-        "surnames": "Grompone von Gioi",
-        "first_names": "Rafael",
-        "institution": "\u00c9cole Normale Sup\u00e9rieure Paris-Saclay",
-        "department": "Centre for Mathematics and their Applications",
-        "person": true
-    },
-    "conicet_(argentina)._instituto_andino_patagonico_de_tecnologias_biologicas_y_geoambientales._juanico_luis_e.": {
-        "surnames": "E.",
-        "first_names": "Juanic\u00f3 Luis",
-        "institution": "Conicet (Argentina)",
-        "department": "Instituto Andino Patag\u00f3nico de Tecnolog\u00edas Biol\u00f3gicas y Geoambientales",
-        "person": true
-    },
-    "institute_of_science_and_technology_for_sustainable_energy_and_mobility_stems--cnr_(italia)._irimescu_adrian": {
-        "surnames": "Irimescu",
-        "first_names": "Adrian",
-        "institution": "Institute of Science and Technology for Sustainable Energy and Mobility STEMS\u2014CNR",
-        "department": null,
-        "person": true
-    },
-    "institute_of_science_and_technology_for_sustainable_energy_and_mobility_stems--cnr_(italia)._merola_simona": {
-        "surnames": "Merola",
-        "first_names": "Simona",
-        "institution": "Institute of Science and Technology for Sustainable Energy and Mobility STEMS\u2014CNR",
-        "department": null,
-        "person": true
-    },
-    "consejo_nacional_de_investigaciones_cientificas_y_tecnicas_(conicet)._argentina._albanesi_alejandro_e.": {
-        "surnames": "Albanesi",
-        "first_names": "Alejandro E.",
-        "institution": "Consejo Nacional de Investigaciones Cient\u00edficas y T\u00e9cnicas (CONICET)",
-        "department": null,
-        "person": true
-    },
-    "licencia_creative_commons_atribucion_-_no_comercial_-_sin_derivadas_(cc_-_by-nc-nd)_piquerez_nicolas": {
-        "surnames": "Piquerez",
+        "surnames": "Goicoechea",
         "first_names": "Nicol\u00e1s",
         "institution": null,
         "department": null,
         "person": true
     },
+    "univesidad_de_la_republica_(uruguay)._facultad_de_ingenieria.instituto_de_mecanica_de_los_fluidos_e_ingenieria_ambiental_cazes_gabriel": {
+        "surnames": "Fern\u00e1ndez",
+        "first_names": "Mariana",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "univeresidad_de_la_republica_(uruguay)._facultad_de_ingenieria._instituto_de_ingenieria_electrica_friss_de_kereki_juan_andres": {
+        "surnames": "Gonzalez-Ayala",
+        "first_names": "J.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "national_institute_of_amazonian_research_(brasil)._bioprospection_and_biotechnology_laboratory._nunez_cecilia_veronica": {
+        "surnames": "Hern\u00e1ndez",
+        "first_names": "Eduardo",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "uruguay._ministerio_de_educacion_y_cultura._instituto_de_investigaciones_biologicas_clemente_estable._caputi_angel": {
+        "surnames": "Pereyra",
+        "first_names": "Santiago",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "univeresidad_de_la_republica_(uruguay)._facultad_de_ingenieria._instituto_de_ingenieria_electrica_bugna_sebastian": {
+        "surnames": "Liguiori",
+        "first_names": "Alberto",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ecole_normale_superieure_paris-saclay._centre_for_mathematics_and_their_applications_grompone_von_gioi_rafael": {
+        "surnames": "Rodr\u00edguez",
+        "first_names": "Dar\u00edo",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "conicet_(argentina)._instituto_andino_patagonico_de_tecnologias_biologicas_y_geoambientales._juanico_luis_e.": {
+        "surnames": "Ferrari",
+        "first_names": "Nicol\u00e1s",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "institute_of_science_and_technology_for_sustainable_energy_and_mobility_stems--cnr_(italia)._irimescu_adrian": {
+        "surnames": "Veresi",
+        "first_names": "Fernando",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "institute_of_science_and_technology_for_sustainable_energy_and_mobility_stems--cnr_(italia)._merola_simona": {
+        "surnames": "Pereira",
+        "first_names": "Javier",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "consejo_nacional_de_investigaciones_cientificas_y_tecnicas_(conicet)._argentina._albanesi_alejandro_e.": {
+        "surnames": "Pioli",
+        "first_names": "Santiago",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "licencia_creative_commons_atribucion_-_no_comercial_-_sin_derivadas_(cc_-_by-nc-nd)_piquerez_nicolas": {
+        "surnames": "Sassi",
+        "first_names": "Paolo",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
     "university_of_cyprus_(chipre)._department_of_electrical_and_computer_engineering_georghiou_george_e.": {
-        "surnames": "Georghiou",
-        "first_names": "George E.",
-        "institution": "University of Cyprus",
-        "department": "Department of Electrical and Computer Engineering",
+        "surnames": "Galeone",
+        "first_names": "Pedro",
+        "institution": null,
+        "department": null,
         "person": true
     },
     "university_of_cyprus_(chipre)._department_of_electrical_and_computer_engineering_theocharides_spyros": {
-        "surnames": "Theocharides",
-        "first_names": "Spyros",
-        "institution": "University of Cyprus",
-        "department": "Department of Electrical and Computer Engineering",
+        "surnames": "Sassi",
+        "first_names": "Paolo",
+        "institution": null,
+        "department": null,
         "person": true
     },
     "consejo_nacional_de_investigaciones_cientificas_y_tecnicas_(conicet)._argentina._demarchi_m._cecilia": {
-        "surnames": "Demarchi",
-        "first_names": "Cecilia M.",
-        "institution": "Consejo Nacional de Investigaciones Cient\u00edficas y T\u00e9cnicas (CONICET)",
+        "surnames": "Sosa",
+        "first_names": "Nicol\u00e1s",
+        "institution": null,
         "department": null,
         "person": true
     },
@@ -40758,6 +40758,1994 @@
         "first_names": "Y",
         "institution": null,
         "department": null,
+        "person": true
+    },
+    "gabriel_a._gonzalez-sprinberg": {
+        "surnames": "Gonz\u00e1lez-Sprinberg",
+        "first_names": "Gabriel A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "christian_andres_diaz_cuadro": {
+        "surnames": "D\u00edaz Cuadro",
+        "first_names": "Christian Andr\u00e9s",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "luis_segura-castillo": {
+        "surnames": "Segura-Castillo",
+        "first_names": "Luis",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "gabriel_pena_vergara": {
+        "surnames": "Pena Vergara",
+        "first_names": "Gabriel",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ismael_piedra_cueva": {
+        "surnames": "Piedra Cueva",
+        "first_names": "Ismael",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "fernanda_rodriguez": {
+        "surnames": "Rodr\u00edguez",
+        "first_names": "Fernanda",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "maria-noel_cabrera": {
+        "surnames": "Cabrera",
+        "first_names": "Mar\u00eda-Noel",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "mariano_rodriguez": {
+        "surnames": "Rodriguez",
+        "first_names": "Mariano",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "nicolas_ferrari": {
+        "surnames": "Ferrari",
+        "first_names": "Nicol\u00e1s",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "dario_rodriguez": {
+        "surnames": "Rodr\u00edguez",
+        "first_names": "Dar\u00edo",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "alejandra_anon": {
+        "surnames": "A\u00f1\u00f3n",
+        "first_names": "Alejandra",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "javier_pereira": {
+        "surnames": "Pereira",
+        "first_names": "Javier",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "santiago_pioli": {
+        "surnames": "Pioli",
+        "first_names": "Santiago",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "pedro_galeone": {
+        "surnames": "Galeone",
+        "first_names": "Pedro",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "nicolas_sosa": {
+        "surnames": "Sosa",
+        "first_names": "Nicol\u00e1s",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "s._gutierrez": {
+        "surnames": "Guti\u00e9rrez",
+        "first_names": "S.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "paolo_sassi": {
+        "surnames": "Sassi",
+        "first_names": "Paolo",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "sorbonne_universite_(francia)._cnrs._lprmc._delamotte_bertrand": {
+        "surnames": "Delamotte",
+        "first_names": "Bertrand",
+        "institution": "Sorbonne Universit\u00e9",
+        "department": "CNRS. LPRMC",
+        "person": true
+    },
+    "carlos_galup_montoro": {
+        "surnames": "Montoro",
+        "first_names": "Carlos",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "pablo_flores-guridi": {
+        "surnames": "Flores-Guridi",
+        "first_names": "Pablo",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "nicolas_goicoechea": {
+        "surnames": "Goicoechea",
+        "first_names": "Nicol\u00e1s",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "eduardo_hernandez": {
+        "surnames": "Hern\u00e1ndez",
+        "first_names": "Eduardo",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "mariana_fernandez": {
+        "surnames": "Fern\u00e1ndez",
+        "first_names": "Mariana",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "j._gonzalez-ayala": {
+        "surnames": "Gonzalez-Ayala",
+        "first_names": "J.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "mauricio_garcia": {
+        "surnames": "Garc\u00eda",
+        "first_names": "Mauricio",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "pedro_pineiro": {
+        "surnames": "Pi\u00f1eiro",
+        "first_names": "Pedro",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "andres_gomez_caram": {
+        "surnames": "G\u00f3mez Caram",
+        "first_names": "Andr\u00e9s",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "eduardo_fernandez_albano": {
+        "surnames": "Fern\u00e1ndez Albano",
+        "first_names": "Eduardo",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "alberto_liguori": {
+        "surnames": "Liguiori",
+        "first_names": "Alberto",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "gustavo_betarte": {
+        "surnames": "Betarte",
+        "first_names": "Gustavo",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "diseno_y_urbanismo_instituto_de_tecnologias_departamento_de_ambiente_construido_area_de_clima_y_confort_universidad_de_la_republica_(uruguay)_facultad_de_arquitectura": {
+        "surnames": "string",
+        "first_names": "string",
+        "institution": "Universidad de la Rep\u00fablica",
+        "department": "Facultad de Arquitectura, Dise\u00f1o y Urbanismo",
+        "person": false
+    },
+    "univesidad_de_la_republica_(uruguay)_facultad_de_ingenieriainstituto_de_mecanica_de_los_fluidos_e_ingenieria_ambiental_gutierrez_alejandro": {
+        "surnames": "Guti\u00e9rrez",
+        "first_names": "Alejandro",
+        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
+        "department": "Facultad de Ingenier\u00eda. Instituto de Mec\u00e1nica de los Fluidos e Ingenier\u00eda Ambiental",
+        "person": true
+    },
+    "univesidad_de_la_republica_(uruguay)_facultad_de_ingenieriainstituto_de_mecanica_de_los_fluidos_e_ingenieria_ambiental_almeida_everton_de": {
+        "surnames": "de Almeida",
+        "first_names": "Everton",
+        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
+        "department": "Facultad de Ingenier\u00eda.Instituto de Mec\u00e1nica de los Fluidos e Ingenier\u00eda Ambiental",
+        "person": true
+    },
+    "univesidad_de_la_republica_(uruguay)_facultad_de_ingenieriainstituto_de_mecanica_de_los_fluidos_e_ingenieria_ambiental_porrini_claudio": {
+        "surnames": "Porrini",
+        "first_names": "Claudio",
+        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
+        "department": "Facultad de Ingenier\u00eda. Instituto de Mec\u00e1nica de los Fluidos e Ingenier\u00eda Ambiental",
+        "person": true
+    },
+    "national_research_councilcnr-_stems_(italy)_science_and_technology_institute_for_sustainable_energy_and_mobility_merola_simona_silvia": {
+        "surnames": "Merola",
+        "first_names": "Simona Silvia",
+        "institution": "National Research Council.CNR- STEMS (Italy)",
+        "department": "Science and Technology Institute for Sustainable Energy and Mobility",
+        "person": true
+    },
+    "univesidad_de_la_republica_(uruguay)_facultad_de_ingenieriainstituto_de_mecanica_de_los_fluidos_e_ingenieria_ambiental_cazes_gabriel": {
+        "surnames": "Cazes",
+        "first_names": "Gabriel",
+        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
+        "department": "Facultad de Ingenier\u00eda.Instituto de Mec\u00e1nica de los Fluidos e Ingenier\u00eda Ambiental",
+        "person": true
+    },
+    "univeresidad_de_la_republica_(uruguay)_facultad_de_ingenieria_instituto_de_ingenieria_electrica_friss_de_kereki_juan_andres": {
+        "surnames": "de Kereki",
+        "first_names": "Juan Andr\u00e9s",
+        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
+        "department": "Facultad de Ingenier\u00eda. Instituto de Ingenier\u00eda El\u00e9ctrica",
+        "person": true
+    },
+    "national_institute_of_amazonian_research_(brasil)_bioprospection_and_biotechnology_laboratory_nunez_cecilia_veronica": {
+        "surnames": "Nunez",
+        "first_names": "Cecilia Veronica",
+        "institution": "National Institute of Amazonian Research (Brasil)",
+        "department": "Bioprospection and Biotechnology Laboratory",
+        "person": true
+    },
+    "uruguay_ministerio_de_educacion_y_cultura_instituto_de_investigaciones_biologicas_clemente_estable_caputi_angel": {
+        "surnames": "Caputi",
+        "first_names": "\u00c1ngel",
+        "institution": "Ministerio de Educaci\u00f3n y Cultura",
+        "department": "Instituto de Investigaciones Biol\u00f3gicas Clemente Estable",
+        "person": true
+    },
+    "univeresidad_de_la_republica_(uruguay)_facultad_de_ingenieria_instituto_de_ingenieria_electrica_bugna_sebastian": {
+        "surnames": "Bugna",
+        "first_names": "Sebasti\u00e1n",
+        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
+        "department": "Facultad de Ingenier\u00eda. Instituto de Ingenier\u00eda El\u00e9ctrica",
+        "person": true
+    },
+    "ecole_normale_superieure_paris-saclay_centre_for_mathematics_and_their_applications_grompone_von_gioi_rafael": {
+        "surnames": "Grompone von Gioi",
+        "first_names": "Rafael",
+        "institution": "\u00c9cole Normale Sup\u00e9rieure Paris-Saclay",
+        "department": "Centre for Mathematics and their Applications",
+        "person": true
+    },
+    "conicet_(argentina)_instituto_andino_patagonico_de_tecnologias_biologicas_y_geoambientales_juanico_luis_e": {
+        "surnames": "E.",
+        "first_names": "Juanic\u00f3 Luis",
+        "institution": "Conicet (Argentina)",
+        "department": "Instituto Andino Patag\u00f3nico de Tecnolog\u00edas Biol\u00f3gicas y Geoambientales",
+        "person": true
+    },
+    "institute_of_science_and_technology_for_sustainable_energy_and_mobility_stems--cnr_(italia)_irimescu_adrian": {
+        "surnames": "Irimescu",
+        "first_names": "Adrian",
+        "institution": "Institute of Science and Technology for Sustainable Energy and Mobility STEMS\u2014CNR",
+        "department": null,
+        "person": true
+    },
+    "institute_of_science_and_technology_for_sustainable_energy_and_mobility_stems--cnr_(italia)_merola_simona": {
+        "surnames": "Merola",
+        "first_names": "Simona",
+        "institution": "Institute of Science and Technology for Sustainable Energy and Mobility STEMS\u2014CNR",
+        "department": null,
+        "person": true
+    },
+    "consejo_nacional_de_investigaciones_cientificas_y_tecnicas_(conicet)_argentina_albanesi_alejandro_e": {
+        "surnames": "Albanesi",
+        "first_names": "Alejandro E.",
+        "institution": "Consejo Nacional de Investigaciones Cient\u00edficas y T\u00e9cnicas (CONICET)",
+        "department": null,
+        "person": true
+    },
+    "university_of_cyprus_(chipre)_department_of_electrical_and_computer_engineering_georghiou_george_e": {
+        "surnames": "Georghiou",
+        "first_names": "George E.",
+        "institution": "University of Cyprus",
+        "department": "Department of Electrical and Computer Engineering",
+        "person": true
+    },
+    "university_of_cyprus_(chipre)_department_of_electrical_and_computer_engineering_theocharides_spyros": {
+        "surnames": "Spyros",
+        "first_names": "Theocharides",
+        "institution": "University of Cyprus",
+        "department": "Department of Electrical and Computer Engineering",
+        "person": true
+    },
+    "consejo_nacional_de_investigaciones_cientificas_y_tecnicas_(conicet)_argentina_demarchi_m_cecilia": {
+        "surnames": "Demarchi",
+        "first_names": "Cecilia",
+        "institution": "Consejo Nacional de Investigaciones Cient\u00edficas y T\u00e9cnicas (CONICET)",
+        "department": null,
+        "person": true
+    },
+    "federal_university_of_rio_de_janeiro_(brasil)__institute_of_chemistry_de_souza_gerardo_gerson_b": {
+        "surnames": "de Souza",
+        "first_names": "Gerardo Gerson B.",
+        "institution": "Federal University of Rio de Janeiro (Brasil)",
+        "department": "Institute of Chemistry",
+        "person": true
+    },
+    "university_of_cyprus_(chipre)_department_of_electrical_and_computer_engineering_theristis_marios": {
+        "surnames": "Marios",
+        "first_names": "Theristis",
+        "institution": "University of Cyprus",
+        "department": "Department of Electrical and Computer Engineering",
+        "person": true
+    },
+    "centro_de_investigaciones_en_laseres_y_aplicaciones_(citedef-conicet)_(argentina)_orte_facundo": {
+        "surnames": "Orte",
+        "first_names": "Facundo",
+        "institution": "Centro de Investigaciones en L\u00e1seres y Aplicaciones (CITEDEF-CONICET)",
+        "department": null,
+        "person": true
+    },
+    "university_of_cyprus_(chipre)_department_of_electrical_and_computer_engineering_makrides_george": {
+        "surnames": "Makrides",
+        "first_names": "George",
+        "institution": "University of Cyprus",
+        "department": "Department of Electrical and Computer Engineering",
+        "person": true
+    },
+    "instituto_de_investigaciones_cientificas_y_tecnicas_para_la_defensa__(argentina)_orte_facundo": {
+        "surnames": "Orte",
+        "first_names": "Facundo",
+        "institution": "Instituto de Investigaciones Cient\u00edficas y T\u00e9cnicas para la Defensa",
+        "department": null,
+        "person": true
+    },
+    "instituto_de_investigaciones_cientificas_y_tecnicas_para_la_defensa__(argentina)_lell_julian": {
+        "surnames": "Lell",
+        "first_names": "Juli\u00e1n",
+        "institution": "Instituto de Investigaciones Cient\u00edficas y T\u00e9cnicas para la Defensa",
+        "department": null,
+        "person": true
+    },
+    "university_of_east_anglia(reino_unido)_school_of_environmental_sciences_dorling_stephen": {
+        "surnames": "Dorling",
+        "first_names": "Stephen",
+        "institution": "University of East Anglia",
+        "department": "School of Environmental Sciences",
+        "person": true
+    },
+    "republica_(uruguay)_facultad_de_ingenieria_instituto_de_ingenieria_electrica_muse_pablo": {
+        "surnames": "Mus\u00e9",
+        "first_names": "Pablo",
+        "institution": "Rep\u00fablica (Uruguay)",
+        "department": "Facultad de Ingenier\u00eda",
+        "person": true
+    },
+    "state_university_of_amazonas_(brasil)_college_of_technology_garcia_del_pino_gilberto": {
+        "surnames": "Garcia del Pino",
+        "first_names": "Gilberto",
+        "institution": "State University of Amazonas",
+        "department": "College of Technology",
+        "person": true
+    },
+    "university_of_east_anglia(reino_unido)_school_of_environmental_sciences_vila_eugenia": {
+        "surnames": "Vila",
+        "first_names": "Eugenia",
+        "institution": "University of East Anglia",
+        "department": "School of Environmental Sciences",
+        "person": true
+    },
+    "keele_university_(reino_unido)_school_of_computing_and_mathematics_kitchenham_barbara": {
+        "surnames": "Kitchenham",
+        "first_names": "Barbara",
+        "institution": "Keele University",
+        "department": "School of Computing and Mathematics",
+        "person": true
+    },
+    "federal_university_of_rio_de_janeiro_(brasil)__institute_of_physics_coutinho_lucia_h": {
+        "surnames": "Coutinho",
+        "first_names": "Lucia H.",
+        "institution": "Federal University of Rio de Janeiro",
+        "department": "Institute of Physics",
+        "person": true
+    },
+    "federal_university_of_rio_de_janeiro_(brasil)__institute_of_chemistry_simoes_grazieli": {
+        "surnames": "Sim\u00f5es",
+        "first_names": "Grazieli",
+        "institution": "Federal University of Rio de Janeiro",
+        "department": "Institute of Chemistry",
+        "person": true
+    },
+    "consejo_nacional_de_investigaciones_cientificas_y_tecnicas_(argentina)_salazar_german": {
+        "surnames": "Salazar",
+        "first_names": "Germ\u00e1n",
+        "institution": "Consejo Nacional de Investigaciones Cient\u00edficas y T\u00e9cnicas (Argentina)",
+        "department": null,
+        "person": true
+    },
+    "deutscher_wetterdienst_(alemania)_satellite-based_climate_monitoring_trentmann_jorg": {
+        "surnames": "Trentmann",
+        "first_names": "J\u00f6rg",
+        "institution": "Deutscher Wetterdienst",
+        "department": "Satellite-Based Climate Monitoring",
+        "person": true
+    },
+    "consejo_nacional_de_investigaciones_cientificas_y_tecnicas_(argentina)_d'elia_ruben": {
+        "surnames": "D\u2019El\u00eda",
+        "first_names": "Ruben",
+        "institution": "Consejo Nacional de Investigaciones Cient\u00edficas y T\u00e9cnicas",
+        "department": null,
+        "person": true
+    },
+    "consejo_nacional_de_investigaciones_cientificas_y_tecnicas_(argentina)_lusi_anabela": {
+        "surnames": "Anabela",
+        "first_names": "Lusi",
+        "institution": "Consejo Nacional de Investigaciones Cient\u00edficas y T\u00e9cnicas (Argentina)",
+        "department": null,
+        "person": true
+    },
+    "university_of_warsaw_(polonia)_institute_of_theoretical_physics_chlebicki_andrzej": {
+        "surnames": "Chlebicki",
+        "first_names": "Andrzej",
+        "institution": "University of Warsaw",
+        "department": "Institute of Theoretical Physics",
+        "person": true
+    },
+    "deutscher_wetterdienst_(alemania)_satellite-based_climate_monitoring_pfeifroth_uwe": {
+        "surnames": "Pfeifroth",
+        "first_names": "Uwe",
+        "institution": "Deutscher Wetterdienst",
+        "department": "Satellite-Based Climate Monitoring",
+        "person": true
+    },
+    "moldova_state_university_(moldavia)_institute_of_applied_physics_aculinin_alexandr": {
+        "surnames": "Aculinin",
+        "first_names": "Alexandr",
+        "institution": "Moldova State University",
+        "department": "Institute of Applied Physics",
+        "person": true
+    },
+    "instituto_de_investigaciones_fisicas_de_mar_del_plata_(argentina)_sampayo_oscar_a": {
+        "surnames": "Sampayo",
+        "first_names": "Oscar A.",
+        "institution": "Instituto de Investigaciones F\u00edsicas de Mar del Plata",
+        "department": null,
+        "person": true
+    },
+    "university_of_warsaw_(polonia)_institute_of_theoretical_physics_jakubczyk_pawel": {
+        "surnames": "Jakubczyk",
+        "first_names": "Pawel",
+        "institution": "University of Warsaw",
+        "department": "Institute of Theoretical Physics",
+        "person": true
+    },
+    "university_of_concepcion_(chile)_faculty_of_engineering_valin_fernandez_meyli": {
+        "surnames": "Meyli",
+        "first_names": "Valin Fern\u00e1ndez",
+        "institution": "University of Concepci\u00f3n",
+        "department": "Faculty of Engineering",
+        "person": true
+    },
+    "university_of_leicester_(england)_department_of_computer_science_severi_paula": {
+        "surnames": "Severi",
+        "first_names": "Paula",
+        "institution": "University of Leicester",
+        "department": "Department of Computer Science",
+        "person": true
+    },
+    "republica_(uruguay)_facultad_de_ingenieria_instituto_de_fisica_siri_ricardo": {
+        "surnames": "Ricardo",
+        "first_names": "Siri",
+        "institution": "Rep\u00fablica (Uruguay)",
+        "department": "Facultad de Ingenier\u00eda",
+        "person": true
+    },
+    "university_of_brasilia_(brasil)__department_of_botany_ferreira_cristiane_s": {
+        "surnames": "Ferreira",
+        "first_names": "Cristiane S.",
+        "institution": "University of Brasilia",
+        "department": "Department of Botany",
+        "person": true
+    },
+    "ute_administracion_nacional_de_usinas_y_trasmisiones_electricas_alonso_jorge": {
+        "surnames": "Jorge",
+        "first_names": "Alonso",
+        "institution": "UTE",
+        "department": "Administraci\u00f3n Nacional de Usinas y Trasmisiones El\u00e9ctricas",
+        "person": true
+    },
+    "universite_paris-saclay_ecole_normale_superieure_de_cachan_morel_jean-michel": {
+        "surnames": "Morel",
+        "first_names": "Jean-Michel",
+        "institution": "Universit\u00e9 Paris-Saclay",
+        "department": "Ecole Normale Sup\u00e9rieure de Cachan",
+        "person": true
+    },
+    "instituto_nacional_de_pesquisas_espaciais_(brasil)_rodrigues_goncalves_andre": {
+        "surnames": "Gon\u00e7alves",
+        "first_names": "Andr\u00e9 Rodrigues",
+        "institution": "Instituto Nacional de Pesquisas Espaciais (Brasil)",
+        "department": null,
+        "person": true
+    },
+    "new_york_university_(usa)_music_and_audio_research_laboratory_bello_juan_p": {
+        "surnames": "P.",
+        "first_names": "Juan",
+        "institution": "New York University",
+        "department": "Music and Audio Research Laboratory",
+        "person": true
+    },
+    "consiglio_nazionale_delle_ricerche_(italy)istituto_motori_irimescu_adrian": {
+        "surnames": "Irimescu",
+        "first_names": "Adrian",
+        "institution": "Consiglio Nazionale delle Ricerche",
+        "department": "Istituto Motori",
+        "person": true
+    },
+    "ceuta:_centro_uruguayo_de_tecnologias_apropriadas_(uruguay)_ona_juan_jose": {
+        "surnames": "O\u00f1a",
+        "first_names": "Juan Jos\u00e9",
+        "institution": "Centro Uruguayo de Tecnologias Apropriadas",
+        "department": null,
+        "person": true
+    },
+    "cmla_escuela_normal_superior_de_cachan_(francia)_grompone_von_gioi_rafael": {
+        "surnames": "Grompone von Gioi",
+        "first_names": "Rafael",
+        "institution": "Escuela Normal Superior de Cachan",
+        "department": "CMLA",
+        "person": true
+    },
+    "laboratorio_de_datos_y_sociedad_datysoc_(uruguay)_diaz_charquero_patricia": {
+        "surnames": "D\u00edaz Charquero",
+        "first_names": "Patricia",
+        "institution": "Laboratorio de Datos y Sociedad DATYSOC",
+        "department": "Uruguay",
+        "person": true
+    },
+    "centro_nacional_de_documentacion_musical_lauro_ayestaran_salles_federico": {
+        "surnames": "Sall\u00e9s",
+        "first_names": "Federico",
+        "institution": "Centro Nacional de Documentaci\u00f3n Musical Lauro Ayestar\u00e1n",
+        "department": null,
+        "person": true
+    },
+    "consiglio_nazionale_delle_ricerche_(italy)istituto_motori_merola_simona": {
+        "surnames": "Simona",
+        "first_names": "Merola",
+        "institution": "Consiglio Nazionale delle Ricerche (Italy)",
+        "department": "Istituto Motori",
+        "person": true
+    },
+    "unversidad_de_la_republica_(uruguay)_facultad_de_ingenieria_abal_gonzalo": {
+        "surnames": "Abal",
+        "first_names": "Gonzalo",
+        "institution": "Universidad de la Rep\u00fablica (Uruguay)",
+        "department": "Facultad de Ingenier\u00eda",
+        "person": true
+    },
+    "ceuta:_centro_uruguayo_de_tecnologias_apropriadas(uruguay)_rosa_gustavo": {
+        "surnames": "Gustavo",
+        "first_names": "Rosa",
+        "institution": "Centro Uruguayo de Tecnologias Apropriadas",
+        "department": "CEUTA",
+        "person": true
+    },
+    "instituto_nacional_de_pesquisas_espaciais_(brasil)_santos_costa_rodrigo": {
+        "surnames": "Costa",
+        "first_names": "Rodrigo Santos",
+        "institution": "Instituto Nacional de Pesquisas Espaciais (Brasil)",
+        "department": null,
+        "person": true
+    },
+    "consiglio_nazionale_delle_ricerche_(italy)_istituto_motori_merola_ss": {
+        "surnames": "Merola",
+        "first_names": "S.S.",
+        "institution": "Consiglio Nazionale delle Ricerche (Italy)",
+        "department": "Istituto Motori",
+        "person": true
+    },
+    "sorbonne_universite_(francia)_cnrs_lprmc_sanchez-villalobos_carlos_a": {
+        "surnames": "S\u00e1nchez-Villalobos",
+        "first_names": "Carlos A.",
+        "institution": "Sorbonne Universit\u00e9",
+        "department": "CNRS. LPRMC",
+        "person": true
+    },
+    "universite_paris-saclay_ecole_normale_superieure_de_cachan_lezama_jorge": {
+        "surnames": "Lezama",
+        "first_names": "Jorge",
+        "institution": "Universit\u00e9 Paris-Saclay",
+        "department": "Ecole Normale Sup\u00e9rieure de Cachan",
+        "person": true
+    },
+    "consiglio_nazionale_delle_ricerche_(italy)_istituto_motori_irimescu_a": {
+        "surnames": "Irimescu",
+        "first_names": "A.",
+        "institution": "Consiglio Nazionale delle Ricerche (Italy)",
+        "department": "Istituto Motori",
+        "person": true
+    },
+    "centro_nacional_de_documentacion_musical_lauro_ayestaran_ruiz_viviana": {
+        "surnames": "Ruiz",
+        "first_names": "Viviana",
+        "institution": "Centro Nacional de Documentaci\u00f3n Musical Lauro Ayestar\u00e1n",
+        "department": null,
+        "person": true
+    },
+    "instituto_de_investigaciones_biologicas_clemente_estable_caputi_angel": {
+        "surnames": "Caputi",
+        "first_names": "Angel",
+        "institution": "Instituto de Investigaciones Biol\u00f3gicas Clemente Estable",
+        "department": null,
+        "person": true
+    },
+    "uruguay_ministerio_de_transporte_y_obras_publicas_paz_urban_martin": {
+        "surnames": "Mart\u00edn",
+        "first_names": "Paz Urban",
+        "institution": "Ministerio de Transporte y Obras P\u00fablicas",
+        "department": null,
+        "person": true
+    },
+    "cmla_escuela_normal_superior_de_cachan_(francia)_morel_jean-michel": {
+        "surnames": "Morel",
+        "first_names": "Jean-Michel",
+        "institution": "Escuela Normal Superior de Cachan",
+        "department": "CMLA",
+        "person": true
+    },
+    "uruguay_ministerio_de_transporte_y_obras_publicas_goyeneche_martin": {
+        "surnames": "Goyeneche",
+        "first_names": "Mart\u00edn",
+        "institution": "Ministerio de Transporte y Obras P\u00fablicas",
+        "department": null,
+        "person": true
+    },
+    "pontifical_catholic_university_of_rio_de_janeiro_martinho_lucas_m": {
+        "surnames": "M.",
+        "first_names": "Martinho Lucas",
+        "institution": "Pontifical Catholic University of Rio de Janeiro",
+        "department": null,
+        "person": true
+    },
+    "instituto_tecnologico_de_aeronautica_(brasil)_teixeira_lacava_p": {
+        "surnames": "Teixeira Lacava P.",
+        "first_names": "",
+        "institution": "Instituto Tecnol\u00f3gico de Aeron\u00e1utica (Brasil)",
+        "department": null,
+        "person": true
+    },
+    "instituto_uruguayo_de_meteorologia_(uruguay)_marchesoni_ernesto": {
+        "surnames": "Marchesoni",
+        "first_names": "Ernesto",
+        "institution": "Instituto Uruguayo de Meteorolog\u00eda",
+        "department": null,
+        "person": true
+    },
+    "servicio_meteorologico_nacional_(argentina)_wolfram_elian": {
+        "surnames": "Elian",
+        "first_names": "Wolfram",
+        "institution": "Servicio Meteorol\u00f3gico Nacional (SMN)",
+        "department": null,
+        "person": true
+    },
+    "federal_institute_of_rio_de_janeiro_(brasil)_bernini_rafael_b": {
+        "surnames": "Bernini",
+        "first_names": "Rafael B.",
+        "institution": "Federal Institute of Rio de Janeiro (Brasil)",
+        "department": null,
+        "person": true
+    },
+    "instituto_uruguayo_de_meteorologia_(uruguay)_santayana_nestor": {
+        "surnames": "Santayana",
+        "first_names": "Nestor",
+        "institution": "Instituto Uruguayo de Meteorolog\u00eda",
+        "department": null,
+        "person": true
+    },
+    "instituto_nacional_de_investigacion_agropecuaria_navas_rafael": {
+        "surnames": "Navas",
+        "first_names": "Rafael",
+        "institution": "Instituto Nacional de Investigaci\u00f3n Agropecuaria",
+        "department": null,
+        "person": true
+    },
+    "sorbonne_universite_(francia)_cnrs_lprmc_delamotte_bertrand": {
+        "surnames": "Delamotte",
+        "first_names": "Bertrand",
+        "institution": "Sorbonne Universit\u00e9",
+        "department": "CNRS. LPRMC",
+        "person": true
+    },
+    "university_of_la_reunion_-_piment_laboratory_lauret__philippe": {
+        "surnames": "Lauret",
+        "first_names": "Philippe",
+        "institution": "University of La R\u00e9union",
+        "department": "PIMENT laboratory",
+        "person": true
+    },
+    "sorbonne_universite_(francia)_cnrs_lptmc_tissier_matthieu": {
+        "surnames": "Tissier",
+        "first_names": "Matthieu",
+        "institution": "Sorbonne Universit\u00e9",
+        "department": "LPTMC",
+        "person": true
+    },
+    "servicio_meteorologico_nacional_(argentina)_nollas_fernando": {
+        "surnames": "Nollas",
+        "first_names": "Fernando",
+        "institution": "Servicio Meteorol\u00f3gico Nacional (Argentina)",
+        "department": null,
+        "person": true
+    },
+    "university_of_la_reunion_-_piment_laboratory_david_mathieu": {
+        "surnames": "Mathieu",
+        "first_names": "David",
+        "institution": "University of La R\u00e9union",
+        "department": "PIMENT laboratory",
+        "person": true
+    },
+    "centre_de_physique_theorique_(francia)_cnrs_reinosa_urko": {
+        "surnames": "Reinosa",
+        "first_names": "Urko",
+        "institution": "Centre de Physique Th\u00e9orique",
+        "department": "CNRS",
+        "person": true
+    },
+    "universite_paris_cite_(francia)_cnrs_serreau_julien": {
+        "surnames": "Serreau",
+        "first_names": "Julien",
+        "institution": "Universit\u00e9 Paris Cit\u00e9",
+        "department": "CNRS",
+        "person": true
+    },
+    "inenco__-_conicet_(argentina)_ledesma_ruben_dario": {
+        "surnames": "Ledesma",
+        "first_names": "Rub\u00e9n Dario",
+        "institution": "INENCO - CONICET",
+        "department": null,
+        "person": true
+    },
+    "national_renewable_energy_laboratory_habte_aaron": {
+        "surnames": "Aaron",
+        "first_names": "Habte",
+        "institution": "National Renewable Energy Laboratory",
+        "department": null,
+        "person": true
+    },
+    "instituto_de_fisica_teorica_-_unesp_natale_aa": {
+        "surnames": "A.A.",
+        "first_names": "Natale",
+        "institution": "Instituto de F\u00edsica Te\u00f3rica - UNESP",
+        "department": null,
+        "person": true
+    },
+    "uruguay_ministerio_de_ambiente_sanabria_analia": {
+        "surnames": "Sanabria",
+        "first_names": "Anal\u00eda",
+        "institution": "Ministerio de Ambiente",
+        "department": null,
+        "person": true
+    },
+    "transvalor_s_a_(francia)_thomas_claire": {
+        "surnames": "Claire",
+        "first_names": "Thomas",
+        "institution": "Transvalor S. A. (Francia)",
+        "department": null,
+        "person": true
+    },
+    "uba-conicet-argentina_simionato_c": {
+        "surnames": "Simionato",
+        "first_names": "C.",
+        "institution": "UBA-CONICET-Argentina",
+        "department": null,
+        "person": true
+    },
+    "uba-conicet-argentina_moreira_d": {
+        "surnames": "Moreira",
+        "first_names": "D.",
+        "institution": "UBA-CONICET-Argentina",
+        "department": null,
+        "person": true
+    },
+    "sohma-_uruguay_capeluto_ware_a": {
+        "surnames": "Ware",
+        "first_names": "A. Capeluto",
+        "institution": "SOHMA- Uruguay",
+        "department": null,
+        "person": true
+    },
+    "sohma-_uruguay_de_los_campos_t": {
+        "surnames": "de los Campos T.",
+        "first_names": "",
+        "institution": "SOHMA- Uruguay",
+        "department": null,
+        "person": true
+    },
+    "jose_c_montesinos-lopez": {
+        "surnames": "Montesinos-L\u00f3pez",
+        "first_names": "Jos\u00e9 Cricelio",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "telefonica_uruguay_acuna_jose": {
+        "surnames": "Acu\u00f1a",
+        "first_names": "Jos\u00e9",
+        "institution": "Telef\u00f3nica Uruguay",
+        "department": null,
+        "person": true
+    },
+    "gabriel_a_gonzalez-sprinberg": {
+        "surnames": "Gonz\u00e1lez-Sprinberg",
+        "first_names": "Gabriel A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "alejandro_r_perroni_gonzalez": {
+        "surnames": "Perroni Gonz\u00e1lez",
+        "first_names": "Alejandro R.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "inidep-argentina_guerrero_r": {
+        "surnames": "Guerrero R.",
+        "first_names": "",
+        "institution": "INIDEP-Argentina",
+        "department": null,
+        "person": true
+    },
+    "linebay_sa_irigoyen_alvaro": {
+        "surnames": "Irigoyen",
+        "first_names": "\u00c1lvaro",
+        "institution": "Linebay S.A.",
+        "department": null,
+        "person": true
+    },
+    "carlos_a_sanchez-villalobos": {
+        "surnames": "S\u00e1nchez-Villalobos",
+        "first_names": "Carlos A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "shn-argentina_balestrini_c": {
+        "surnames": "Balestrini",
+        "first_names": "C.",
+        "institution": "SHN-Argentina",
+        "department": null,
+        "person": true
+    },
+    "joao_v_furtado_de_medeiros": {
+        "surnames": "Furtado de Medeiros",
+        "first_names": "Joao V",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "caroline_p_carvalho_chanel": {
+        "surnames": "Carvalho",
+        "first_names": "Caroline P.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ifremer-francia_repecaud_m": {
+        "surnames": "Repecaud",
+        "first_names": "M.",
+        "institution": "IFREMER",
+        "department": null,
+        "person": true
+    },
+    "ifremer-francia_le_bihan_c": {
+        "surnames": "Bihan",
+        "first_names": "C.",
+        "institution": "IFREMER-Francia",
+        "department": null,
+        "person": true
+    },
+    "mauricio_do_v_m_da_costa": {
+        "surnames": "do V. M. da Costa",
+        "first_names": "Mauricio",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "gerardo_gerson_b_de_souza": {
+        "surnames": "de Souza",
+        "first_names": "Gerardo Gerson B.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "eduardo_a_barajas-ramirez": {
+        "surnames": "Barajas-Ramirez",
+        "first_names": "Eduardo A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "fremer-francia_tessier_c": {
+        "surnames": "Tessier",
+        "first_names": "C.",
+        "institution": "FREMER",
+        "department": "Francia",
+        "person": true
+    },
+    "fremer-francia_cayocca_f": {
+        "surnames": "Cayocca F., FREMER",
+        "first_names": "",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "osval_a_montesinos-lopez": {
+        "surnames": "Montesinos-L\u00f3pez",
+        "first_names": "Osval A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ina-argentina_sarubbi_a": {
+        "surnames": "A.",
+        "first_names": "Sarubbi",
+        "institution": "INA-Argentina",
+        "department": null,
+        "person": true
+    },
+    "antonio_d_de_figueiredo": {
+        "surnames": "Figueiredo",
+        "first_names": "Antonio D. de",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "jorge_m_perez_zerpa": {
+        "surnames": "P\u00e9rez Zerpa",
+        "first_names": "Jorge Mart\u00edn",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "timothy_g_constandinou": {
+        "surnames": "Constandinou",
+        "first_names": "Timothy G.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "aleksandar_m_stankovie": {
+        "surnames": "Stankovi\u00e9",
+        "first_names": "Aleksandar M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "juan_m_rodriguez-munoz": {
+        "surnames": "Rodriguez-Mu\u00f1oz",
+        "first_names": "Juan M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "rosana_m_sosa_ferreira": {
+        "surnames": "Sosa Ferreira",
+        "first_names": "Rosana M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "shn-argentina_firpo_a": {
+        "surnames": "Firpo",
+        "first_names": "A.",
+        "institution": "SHN-Argentina",
+        "department": null,
+        "person": true
+    },
+    "francisco_m_bersetche": {
+        "surnames": "Bersetche",
+        "first_names": "Francisco M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ana_i_torres": {
+        "surnames": "Torres Rippa",
+        "first_names": "Ana In\u00e9s",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "t_a_de_artagaveytia": {
+        "surnames": "Artagaveytia",
+        "first_names": "T. A. de",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "isabela_f_apolinario": {
+        "surnames": "Apolin\u00e1rio",
+        "first_names": "Isabela F.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "cristiane_s_ferreira": {
+        "surnames": "Ferreira",
+        "first_names": "Cristiane S.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "alejandro_e_albanesi": {
+        "surnames": "Albanesi",
+        "first_names": "Alejandro E.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "b_stela_sabalsagaray": {
+        "surnames": "Sabalsagaray",
+        "first_names": "B. Stela",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "christopher_j_baker": {
+        "surnames": "Baker",
+        "first_names": "Christopher J.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "constanza_d_andrada": {
+        "surnames": "D \u0301Andrada",
+        "first_names": "Constanza",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "leandro_m_del_pezzo": {
+        "surnames": "Del Pezzo",
+        "first_names": "Leandro M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "marcelo_s_guimaraes": {
+        "surnames": "Guimaraes",
+        "first_names": "Marcelo S.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "luis_a_da_rosa_fros": {
+        "surnames": "Fros",
+        "first_names": "Luis A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "peter_q_pfordresher": {
+        "surnames": "Pfordresher",
+        "first_names": "Peter Q.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "d_salomone-gonzalez": {
+        "surnames": "Salomone-Gonz\u00e1lez",
+        "first_names": "D.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "helene_c_crayencour": {
+        "surnames": "Crayencour",
+        "first_names": "H\u00e9l\u00e8ne C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "sd_martinez-boggio": {
+        "surnames": "Martinez-Boggio",
+        "first_names": "S.D.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "carlos_i_colombana": {
+        "surnames": "Colombana",
+        "first_names": "Carlos I",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "george_e_georghiou": {
+        "surnames": "Georghiou",
+        "first_names": "George E.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ricardo_h_nochetto": {
+        "surnames": "Nochetto",
+        "first_names": "Ricardo H.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "leticia_f_palhares": {
+        "surnames": "Palhares",
+        "first_names": "Let\u00edcia F.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "bernardo_v_miranda": {
+        "surnames": "Miranda",
+        "first_names": "Bernardo V.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "m_cecilia_demarchi": {
+        "surnames": "Demarchi",
+        "first_names": "M. Cecilia",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ina-argentina_re_m": {
+        "surnames": "M.",
+        "first_names": "Re",
+        "institution": "INA-Argentina",
+        "department": null,
+        "person": true
+    },
+    "rafael_a_deslandes": {
+        "surnames": "Deslandes",
+        "first_names": "Rafael A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "carlos_a_fernandez": {
+        "surnames": "Fern\u00e1ndez",
+        "first_names": "Carlos A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "j_l_diaz_rossello": {
+        "surnames": "D\u00edaz Rossello",
+        "first_names": "J. L",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "felipe_l_da_silva": {
+        "surnames": "Silva",
+        "first_names": "Felipe L. da",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "cd_perez-segarra": {
+        "surnames": "P\u00e9rez-Segarra",
+        "first_names": "C.D.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "mario_a_cassinoni": {
+        "surnames": "Cassinoni",
+        "first_names": "Mario A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "william_c_messner": {
+        "surnames": "Messner",
+        "first_names": "William C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "p_teixeira_lacava": {
+        "surnames": "Teixeira Lacava",
+        "first_names": "P.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "f_j_borges_gomes": {
+        "surnames": "Gomes",
+        "first_names": "F. J.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "wilfredo_a_angulo": {
+        "surnames": "Angulo",
+        "first_names": "Wilfredo A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "r_willem_vervoort": {
+        "surnames": "Vervoort",
+        "first_names": "R. Willem",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "victor_m_albornoz": {
+        "surnames": "Albornoz",
+        "first_names": "V\u00edctor M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "a_calvo_hernandez": {
+        "surnames": "Calvo Hern\u00e1ndez",
+        "first_names": "A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "m_daniel_ferrari": {
+        "surnames": "Ferrari",
+        "first_names": "M. Daniel",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "g_gonzalez-ayala": {
+        "surnames": "Gonzalez-Ayala",
+        "first_names": "G.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "j_gonzalez-ayala": {
+        "surnames": "Gonzalez-Ayala",
+        "first_names": "J.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "rafael_b_bernini": {
+        "surnames": "Bernini",
+        "first_names": "Rafael B.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "marcelo_h_garcia": {
+        "surnames": "Garc\u00eda",
+        "first_names": "Marcelo H.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "silvio_c_cazella": {
+        "surnames": "Cazella",
+        "first_names": "S\u00edlvio C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "juan_j_cabezas": {
+        "surnames": "Cabezas",
+        "first_names": "Juan Jos\u00e9",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "lucia_h_coutinho": {
+        "surnames": "Coutinho",
+        "first_names": "Lucia H.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "francisco_a_gari": {
+        "surnames": "Gari",
+        "first_names": "Francisco A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "juan_j_umpierrez": {
+        "surnames": "Umpi\u00e9rrez",
+        "first_names": "Juan J.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "w_tecumseh_fitch": {
+        "surnames": "Fitch",
+        "first_names": "W. Tecumseh",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "vicente_i_garcia": {
+        "surnames": "Garc\u00eda",
+        "first_names": "Vicente I.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "lucas_m_martinho": {
+        "surnames": "Martinho",
+        "first_names": "Lucas M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "glauco_n_taranto": {
+        "surnames": "Taranto",
+        "first_names": "Glauco N.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "john_s_popovics": {
+        "surnames": "Popovics",
+        "first_names": "John S.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "lorena_di_chiara": {
+        "surnames": "Di Chiara",
+        "first_names": "Lorena",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "oscar_a_sampayo": {
+        "surnames": "Sampayo",
+        "first_names": "Oscar A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "juan_p_bello": {
+        "surnames": "Bello",
+        "first_names": "Juan Pablo",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "suzanne_c_purdy": {
+        "surnames": "Purdy",
+        "first_names": "Suzanne C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "john_p_lehoczky": {
+        "surnames": "Lehoczky",
+        "first_names": "John P.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "a_capeluto_ware": {
+        "surnames": "Ware",
+        "first_names": "A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "abner_j_salgado": {
+        "surnames": "Salgado",
+        "first_names": "Abner J.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "t_de_los_campos": {
+        "surnames": "de los Campos",
+        "first_names": "T.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "pl_curto-risso": {
+        "surnames": "Curto-Risso",
+        "first_names": "P.L.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "arthur_mb_braga": {
+        "surnames": "Braga",
+        "first_names": "Arthur M.B",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "jm_perez_zerpa": {
+        "surnames": "Zerpa",
+        "first_names": "J.M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "fernando_veresi": {
+        "surnames": "Veresi",
+        "first_names": "Fernando",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "b_erik_ydstie": {
+        "surnames": "Ydstie",
+        "first_names": "B. Erik",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "k_t_v_grattan": {
+        "surnames": "Grattan",
+        "first_names": "K. T. V",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "helena_m_ramos": {
+        "surnames": "Ramos",
+        "first_names": "Helena M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "luis_e_juanico": {
+        "surnames": "Juanic\u00f3",
+        "first_names": "Luis E.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "john_m_mcbride": {
+        "surnames": "McBride",
+        "first_names": "John M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "shawn_w_walker": {
+        "surnames": "Walker",
+        "first_names": "Shawn W.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "g_pena_vergara": {
+        "surnames": "Pena Vergara",
+        "first_names": "G.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "jose_i_arsuaga": {
+        "surnames": "Arsuaga",
+        "first_names": "Jos\u00e9 I",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "j_l_colodette": {
+        "surnames": "Colodette",
+        "first_names": "J. L.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "c_diaz-cuadro": {
+        "surnames": "D\u00edaz-Cuadro",
+        "first_names": "C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "m_c_schneider": {
+        "surnames": "Schneider",
+        "first_names": "M. C",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "mc_vanzulli": {
+        "surnames": "Vanzulli",
+        "first_names": "M. C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "mn_rodriguez": {
+        "surnames": "Rodr\u00edguez",
+        "first_names": "M.N.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "me_de_castel": {
+        "surnames": "Castel",
+        "first_names": "M.E. de",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "j_p_eggermont": {
+        "surnames": "Eggermont",
+        "first_names": "J. P",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "bruno_w_mintz": {
+        "surnames": "Mintz",
+        "first_names": "Bruno W.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "walter_s_hill": {
+        "surnames": "Hill",
+        "first_names": "Walter S.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "janina_c_letz": {
+        "surnames": "Letz",
+        "first_names": "Janina C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "g_h_r_jorge": {
+        "surnames": "R",
+        "first_names": "Jorge G. H.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "e_g_s_luna": {
+        "surnames": "Luna",
+        "first_names": "E. G. S.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "c_balestrini": {
+        "surnames": "Balestrini",
+        "first_names": "C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "m_re": {
+        "surnames": "de Oliveira",
+        "first_names": "M",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "jean_m_morel": {
+        "surnames": "Morel",
+        "first_names": "Jean M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "r_kreimerman": {
+        "surnames": "Kreimerman",
+        "first_names": "R.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "i_rodriguez": {
+        "surnames": "Rodr\u00edguez",
+        "first_names": "I.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "max_o_souza": {
+        "surnames": "Souza",
+        "first_names": "Max O.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "v_benavides": {
+        "surnames": "Benavides",
+        "first_names": "V.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "j_p_colinge": {
+        "surnames": "Colinge",
+        "first_names": "J. P",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "h_figueredo": {
+        "surnames": "Figueredo",
+        "first_names": "H.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "j_c_velluti": {
+        "surnames": "Velluti",
+        "first_names": "J. C",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "jb_bazzano": {
+        "surnames": "Bazzano",
+        "first_names": "J.B.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "c_simionato": {
+        "surnames": "Simionato",
+        "first_names": "C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "e_gutierrez": {
+        "surnames": "Guti\u00e9rrez",
+        "first_names": "E.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "c_le_bihan": {
+        "surnames": "Bihan",
+        "first_names": "C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ecn_silva": {
+        "surnames": "Silva",
+        "first_names": "E.C.N",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "o_antepara": {
+        "surnames": "Antepara",
+        "first_names": "O.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "aa_natale": {
+        "surnames": "Natale",
+        "first_names": "A.A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "gb_bopsin": {
+        "surnames": "Bopsin",
+        "first_names": "G.B.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ss_merola": {
+        "surnames": "Merola",
+        "first_names": "S.S.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "l_carrasco": {
+        "surnames": "Carrasco",
+        "first_names": "L.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ai_torres": {
+        "surnames": "Torres",
+        "first_names": "A.I.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "j_p_raskin": {
+        "surnames": "Raskin",
+        "first_names": "J. P",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "o_lehmkuhl": {
+        "surnames": "Lehmkuhl",
+        "first_names": "O.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "n_balcazar": {
+        "surnames": "Balc\u00e1zar",
+        "first_names": "N.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "m_repecaud": {
+        "surnames": "Repecaud",
+        "first_names": "M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "c_philipp": {
+        "surnames": "Philippi",
+        "first_names": "C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "w_a_bizzo": {
+        "surnames": "Bizzo",
+        "first_names": "W. A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "edi_w_juri": {
+        "surnames": "Juri",
+        "first_names": "Edi W.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "jmm_roco": {
+        "surnames": "Roco",
+        "first_names": "J.M.M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "a_irimescu": {
+        "surnames": "Irimescu",
+        "first_names": "A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "r_guerrero": {
+        "surnames": "Guerrero",
+        "first_names": "R.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "f_cayocca": {
+        "surnames": "Cayocca",
+        "first_names": "F.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "ja_oller": {
+        "surnames": "Oller",
+        "first_names": "J.A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "z_y_zhang": {
+        "surnames": "Zhang",
+        "first_names": "Z. Y",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "r_escuder": {
+        "surnames": "Escuder",
+        "first_names": "R.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "cy_kiyono": {
+        "surnames": "Kiyono",
+        "first_names": "C.Y",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "c_tessier": {
+        "surnames": "Tessier",
+        "first_names": "C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "d_moreira": {
+        "surnames": "Moreira",
+        "first_names": "D.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "a_sarubbi": {
+        "surnames": "Sarubbi",
+        "first_names": "A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "a_medina": {
+        "surnames": "Medina",
+        "first_names": "A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "r_acosta": {
+        "surnames": "Acosta",
+        "first_names": "R.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "g_sapiro": {
+        "surnames": "Sapiro",
+        "first_names": "G.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "fn_lujan": {
+        "surnames": "Lujan",
+        "first_names": "F.N",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "h_g_xing": {
+        "surnames": "Xing",
+        "first_names": "H. G",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "j_rigola": {
+        "surnames": "Rigola",
+        "first_names": "J.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "v_o_roda": {
+        "surnames": "Roda",
+        "first_names": "V. O",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "m_rubino": {
+        "surnames": "Rubino",
+        "first_names": "M.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "a_firpo": {
+        "surnames": "Firpo",
+        "first_names": "A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "a_oliva": {
+        "surnames": "Oliva",
+        "first_names": "A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "a_amani": {
+        "surnames": "Amani",
+        "first_names": "A.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "c_oliet": {
+        "surnames": "Oliet",
+        "first_names": "C.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "g_usera": {
+        "surnames": "Usera",
+        "first_names": "G.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "f_favre": {
+        "surnames": "Favre",
+        "first_names": "F.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "p_ures": {
+        "surnames": "Ures",
+        "first_names": "P.",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "santiago_pereyra": {
+        "surnames": "Pereyra",
+        "first_names": "Santiago",
+        "institution": null,
+        "department": null,
+        "person": true
+    },
+    "sorbonne_universite_(francia)_cnrs_lptmc_delamotte_bertrand": {
+        "surnames": "Delamotte",
+        "first_names": "Bertrand",
+        "institution": "Sorbonne Universit\u00e9",
+        "department": "LPTMC",
         "person": true
     }
 }

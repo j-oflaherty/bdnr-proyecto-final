@@ -1,9 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Person(BaseModel):
     normalized_name: str
-    aliases: list[str] | None
+    aliases: list[str] = Field(default_factory=list)
+    names: str | None = None
+    surnames: str | None = None
 
 
 class Work(BaseModel):

@@ -25,11 +25,17 @@ class UdelarGraphRepository:
             person: Person object to create/update
         """
         query = """\
-        MERGE (p:Person {normalized_name: $normalized_name})
+        MERGE (p:Person {normalized_name: $normalized_name, names: $names, surnames: $surnames})
         ON CREATE SET p.aliases = $aliases
         ON MATCH SET p.aliases = $aliases
         """
-        tx.run(query, normalized_name=person.normalized_name, aliases=person.aliases)
+        tx.run(
+            query,
+            normalized_name=person.normalized_name,
+            aliases=person.aliases,
+            names=person.names,
+            surnames=person.surnames,
+        )
 
     def _create_person_batch_tx(self, tx: ManagedTransaction, persons: list[Person]):
         """Create or update multiple person nodes in the transaction.
@@ -59,7 +65,7 @@ class UdelarGraphRepository:
         with self.driver.session() as session:
             session.execute_write(self._create_person_batch_tx, persons)
 
-    def _create_work_tx(self, tx: ManagedTransaction, work: Work):
+    def _upsert_work_tx(self, tx: ManagedTransaction, work: Work):
         """Create or update a work node in the transaction.
 
         Args:
@@ -92,7 +98,7 @@ class UdelarGraphRepository:
             language=work.language,
         )
 
-    def _create_work_batch_tx(self, tx: ManagedTransaction, works: list[Work]):
+    def _upsert_work_batch_tx(self, tx: ManagedTransaction, works: list[Work]):
         """Create or update multiple work nodes in the transaction.
 
         Args:
@@ -100,7 +106,7 @@ class UdelarGraphRepository:
             works: List of Work objects to create/update
         """
         for w in works:
-            self._create_work_tx(tx, w)
+            self._upsert_work_tx(tx, w)
 
     def create_work(self, work: Work):
         """Create or update a single work node.
@@ -109,7 +115,16 @@ class UdelarGraphRepository:
             work: Work object to create/update
         """
         with self.driver.session() as session:
-            session.execute_write(self._create_work_tx, work)
+            session.execute_write(self._upsert_work_tx, work)
+
+    def update_work(self, work: Work):
+        """Update a single work node.
+
+        Args:
+            work: Work object to update
+        """
+        with self.driver.session() as session:
+            session.execute_write(self._upsert_work_tx, work)
 
     def create_works_batch(self, works: list[Work]):
         """Create or update multiple work nodes.
@@ -118,7 +133,16 @@ class UdelarGraphRepository:
             works: List of Work objects to create/update
         """
         with self.driver.session() as session:
-            session.execute_write(self._create_work_batch_tx, works)
+            session.execute_write(self._upsert_work_batch_tx, works)
+
+    def update_works_batch(self, works: list[Work]):
+        """Update multiple work nodes.
+
+        Args:
+            works: List of Work objects to update
+        """
+        with self.driver.session() as session:
+            session.execute_write(self._upsert_work_batch_tx, works)
 
     def _create_work_type_tx(self, tx: ManagedTransaction, work: Work, type: WorkType):
         """Create a work type relationship in the transaction.

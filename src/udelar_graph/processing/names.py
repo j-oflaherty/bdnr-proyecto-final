@@ -1,5 +1,7 @@
+import openai
 import polars as pl
 from Levenshtein import distance
+from pydantic import BaseModel
 from tqdm import tqdm
 from unidecode import unidecode
 
@@ -22,16 +24,18 @@ def parse_full_name(name: str) -> dict | None:
         return None
 
     # Normalize for comparison
-    surnames_normalized = unidecode(surnames.lower()).replace(" ", "_")
-    first_names_normalized = unidecode(first_names.lower()).replace(" ", "_")
+    surnames_normalized = unidecode(surnames.lower()).replace(" ", "_").replace(".", "")
+    first_names_normalized = (
+        unidecode(first_names.lower()).replace(" ", "_").replace(".", "")
+    )
 
     return {
         "surnames": surnames,
         "first_names": first_names,
         "surnames_normalized": surnames_normalized,
         "first_names_normalized": first_names_normalized,
-        "surnames_parts": surnames_normalized.split(),
-        "first_names_parts": first_names_normalized.split(),
+        "surnames_parts": surnames_normalized.split("_"),
+        "first_names_parts": first_names_normalized.split("_"),
     }
 
 
@@ -271,3 +275,54 @@ def get_people_list(df: pl.DataFrame) -> tuple[list[Person], dict[str, str]]:
         people.append(Person(normalized_name=normalized_name, aliases=list(name_set)))
 
     return people, people_to_nname_mapping
+
+
+class StructuredNameResponse(BaseModel):
+    surnames: str
+    first_names: str
+    institution: str | None = None
+    department: str | None = None
+    person: bool
+
+
+async def extract_person_name(
+    person: Person, *, pbar: tqdm | None = None
+) -> StructuredNameResponse | None:
+    """Extract a name from a person"""
+
+    longest_alias = max(person.aliases, key=len) if person.aliases else None
+    if not longest_alias:
+        return None
+
+    prompt = """\
+You are an expert extracting people names from unstructured text. \
+You'll be given a name in any format and will return a json object with the following \
+format.  If there is extra information on the text, like the institution, the \
+position, etc, you should return it in the "institution" and "department" fields. \
+The names are mostly in spanish and can appear in any order.
+
+{
+    "surnames": "string",
+    "first_names": "string",
+    "institution": "string" | None,
+    "department": "string" | None,
+    "person": bool # True if the text is a person name, False otherwise.
+}
+
+If the text is not a person name, return None.
+"""
+    client = openai.AsyncOpenAI()
+    response = await client.responses.parse(
+        model="gpt-4o-mini",
+        temperature=0.0,
+        input=[
+            {"role": "system", "content": prompt},
+            {"role": "user", "content": longest_alias},
+        ],
+        text_format=StructuredNameResponse,
+    )
+
+    if pbar is not None:
+        pbar.update(1)
+
+    return response.output_parsed

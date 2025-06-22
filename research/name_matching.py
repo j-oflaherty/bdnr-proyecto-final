@@ -11,11 +11,6 @@ from udelar_graph.models import Person
 with open("data/colibri_people.json", "r") as f:
     people = [Person.model_validate(p) for p in json.load(f)]
 # %%
-# Fix the linter error by adding a check
-if people[10].aliases:
-    people[10].aliases[0]
-
-# %%
 import openai
 from pydantic import BaseModel
 
@@ -138,4 +133,24 @@ extracted_names_json = {
 }
 with open("data/extracted_names.json", "w") as f:
     json.dump(extracted_names_json, f, indent=4)
+# %%
+import json
+
+from udelar_graph.processing.names import StructuredNameResponse
+
+with open("data/extracted_names.json", "r") as f:
+    extracted_names_json = {
+        k: StructuredNameResponse.model_validate(v) for k, v in json.load(f).items()
+    }
+
+# %%
+for k, v in extracted_names_json.items():
+    if v.first_names is None:
+        print(k)
+    if v.surnames is None:
+        print(k)
+
+# %%
+len(extracted_names_json.keys())
+
 # %%
