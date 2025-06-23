@@ -156,6 +156,8 @@ Para el modelado se optó por un grafo de propiedades, gestionado con la base de
 	\caption{Esquema del grafo de propiedades implementado.}
 	\label{fig:grafo}
 \end{figure}
+Los nodos de tipo \texttt{PERSON} representan a los individuos de la Fing, incluyendo docentes, estudiantes e investigadores. Los nodos \texttt{WORK} almacenan información sobre los trabajos académicos, que tienen definido el tipo con la relación \texttt{TYPE} con los nodos \texttt{WORK\_TYPE}. Se clasifican según su naturaleza en artículo, tesis, tesis de maestría, etc. Los nodos \texttt{KEYWORD} almacenan palabras clave asociadas a cada trabajo.
+La relación \texttt{AUTHOR\_OF} conecta a los investigadores con los artículos que han escrito y a los estudiantes con sus tesis. La relación \texttt{CONTRIBUTOR\_OF} permite registrar aquellos docentes que fueron tutores de una tesis.
 
 La carga de los datos se automatizó mediante scripts de Python que utilizan la biblioteca oficial de Neo4j. El proceso, encapsulado en el módulo \texttt{udelar\_graph/load/colibri.py}, transforma los datos preprocesados en nodos y relaciones mediante consultas Cypher. Para facilitar la ejecución, se implementó una interfaz de línea de comandos (CLI) con la biblioteca Typer. El comando \texttt{colibri-load} permite poblar la base de datos, incluyendo una opción para limpiarla previamente y así garantizar la reproducibilidad de los experimentos. Una vez cargados los datos de Colibrí, se ejecutó el comando \texttt{openalex-load} para integrar los datos de OpenAlex.
 

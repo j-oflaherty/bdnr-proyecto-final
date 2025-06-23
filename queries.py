@@ -41,7 +41,7 @@ class UdegraphQueries:
     # 1. Person with most works
     def get_person_with_most_works_query(self):
         return """
-        MATCH (p:Person)-[:AUTHOR_OF | CONTRIBUTOR_OF]->(w:Work)
+        MATCH (p:Person)-[:AUTHOR_OF]->(w:Work)
         RETURN p, COUNT(w) AS works_count
         ORDER BY works_count DESC
         LIMIT 1
@@ -86,12 +86,35 @@ class UdegraphQueries:
         """
 
     # 6. Shortest path between two people
-    def get_shortest_path_between_people_query(self, person1, person2):
-        return """
-        MATCH (p1:Person {normalized_name: $person1}), (p2:Person {normalized_name: $person2})
-        MATCH path = shortestPath((p1)-[:AUTHOR_OF|CONTRIBUTOR_OF*]-(p2))
+    def get_shortest_paths_between_people_query(self, person1, person2, max_length=6):
+        return f"""
+        MATCH
+          // Encuentra el nodo de inicio y fin usando los parámetros
+          (p1:Person {{normalized_name: $person1}}),
+          (p2:Person {{normalized_name: $person2}}),
+          // Busca el camino más corto usando la función shortestPath
+          path = shortestPath(
+            // El patrón del camino, con la longitud máxima insertada como un literal
+            (p1)-[:AUTHOR_OF|CONTRIBUTOR_OF*1..{max_length}]-(p2)
+          )
+        // Devuelve el camino completo encontrado
         RETURN path
-        """  # noqa: E501
+        """
+
+    # 7. Get all work types
+    def get_possible_work_types_query(self):
+        return """
+        MATCH (wt:WorkType)
+        RETURN wt
+        """
+
+    # 8. Get number of works by type
+    def get_number_of_works_by_type_query(self):
+        return """
+        MATCH (w:Work)-[:TYPE]->(wt:WorkType)
+        RETURN wt, COUNT(w) AS works_count
+        ORDER BY works_count DESC
+        """
 
     def close(self):
         if self.driver is not None:
@@ -155,11 +178,13 @@ if __name__ == "__main__":
         print()
 
         # 5. Path between two people: Graciana Castro and Julian O'Flaherty
-        person1 = "castro_graciana"
-        person2 = "etcheverry_lorena"
+        person1 = "graciana castro"
+        person2 = "lorena etcheverry"
         print(f"🔹 Shortest path between {person1} and {person2}:")
         result = session.run(
-            query.get_shortest_path_between_people_query(person1, person2),
+            query.get_shortest_paths_between_people_query(
+                person1, person2, max_length=30
+            ),
             {"person1": person1, "person2": person2},
         )
         for record in result:
@@ -168,7 +193,7 @@ if __name__ == "__main__":
         print()
 
         # 6. Get works by a specific person
-        person_name = "castro_graciana"
+        person_name = "graciana castro"
         print(f"🔹 Works by {person_name}:")
         result = session.run(
             query.get_person_works_query(person_name), {"person_name": person_name}
@@ -188,6 +213,24 @@ if __name__ == "__main__":
             person = record["p"]
             print(f"{person}")
 
+        print()
+
+        # 8. Get all work types:
+        print("🔹 Possible work types:")
+        result = session.run(query.get_possible_work_types_query())
+        for record in result:
+            work_type = record["wt"]["type"]
+            print(f"  Work Type: {work_type}")
+
+        print()
+
+        # 9. Get number of works by type
+        print("🔹 Number of works by type:")
+        result = session.run(query.get_number_of_works_by_type_query())
+        for record in result:
+            work_type = record["wt"]["type"]
+            works_count = record["works_count"]
+            print(f"  Work Type: {work_type}, Number of Works: {works_count}")
         print()
 
         query.close()
