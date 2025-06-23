@@ -9,4 +9,6 @@
         }
     },
     "python.REPL.enableREPLSmartSend": false,
+    "latex-workshop.formatting.latex": "latexindent"
+    
 }

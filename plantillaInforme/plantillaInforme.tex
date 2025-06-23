@@ -1,0 +1,261 @@
+\documentclass[journal,onecolumn]{IEEEtran}
+%\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+
+\usepackage{url}
+\usepackage{xspace}
+
+\usepackage[Algorithm]{algorithm}
+\usepackage{algorithmic}
+\usepackage{setspace}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{tabularx}
+
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+
+
+
+%paquete para mostrar código
+\usepackage{listings}
+\usepackage{caption}
+\lstset{
+	basicstyle=\ttfamily\scriptsize, 
+	columns=fullflexible, 
+	%numbers=left, 
+	%numberstyle=\tiny, 
+	%numbersep=5pt,
+	framexleftmargin=15pt,
+	%framexrightmargin=17pt,
+	framexbottommargin=2pt,
+	framextopmargin=2pt,
+	xleftmargin=15pt,
+	frame=top,frame=bottom,
+	captionpos=t,
+	}
+
+\captionsetup[lstlisting]{singlelinecheck=false, margin=0pt, labelsep=space,labelfont=bf}
+
+%necesario para que diga Listado y no Listing	
+\renewcommand{\lstlistingname}{Listado}	
+
+\lstnewenvironment{sflisting}[1][]
+{\lstset{#1}}{}
+
+%%ejemplo de estilo para el lenguaje SPARQL
+
+\lstdefinelanguage{sparql}{
+	morecomment=[l][\color{teal}]{\#},
+	morestring=[b][\color{blue}]\",
+	morekeywords={SELECT,CONSTRUCT,DESCRIBE,ASK,WHERE,FROM,NAMED,PREFIX,BASE,OPTIONAL,FILTER,GRAPH,LIMIT,OFFSET,SERVICE,UNION,EXISTS,NOT,BINDINGS,MINUS,a,as,GROUP,BY,SUM,AVG,VALUES},
+	sensitive=false
+}
+
+%listings styles
+\lstdefinestyle{sparql}{
+	basicstyle=\ttfamily\scriptsize, 
+	language=sparql,
+	columns=fullflexible, 
+	numberstyle= \tiny, %\scriptsize,
+	numbers=left,
+	frame=lines,
+	tabsize=2}
+
+\lstdefinestyle{python}{
+	basicstyle=\ttfamily\scriptsize, 
+	language=Python,
+	columns=fullflexible, 
+	numberstyle= \tiny, %\scriptsize,
+	%numbers=left,
+	frame=lines,
+	tabsize=2}
+
+
+\makeatletter
+\newcommand{\linebreakand}{%
+\end{@IEEEauthorhalign}
+\hfill\mbox{}\par
+\mbox{}\hfill\begin{@IEEEauthorhalign}
+}
+\makeatother
+
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Plantilla para la elaboración del Informe de Proyecto de Fin de Curso}
+
+
+\author{
+\IEEEauthorblockN{Lorena Etcheverry}
+\IEEEauthorblockA{\textit{Instituto de Computación} \\
+\textit{Facultad de Ingeniería, Universidad de la República}\\
+Montevideo, Uruguay \\
+lorenae@fing.edu.uy}
+%\and \\
+%\IEEEauthorblockN{Autor2}
+%\IEEEauthorblockA{\textit{Instituto de Computación} \\
+%\textit{Facultad de Ingeniería, Universidad de la República}\\
+%Montevideo, Uruguay \\
+%autor2@fing.edu.uy}
+}
+
+\maketitle
+
+\begin{abstract}
+Este documento es por un lado, una plantilla \LaTeX~ para elaborar el el informe de Proyecto Final del curso de Bases de Datos no Relacionales, pero también contiene recomendaciones para la elaboración de su contenido.
+\end{abstract}
+
+
+
+\section{Introducción a la plantilla}
+\label{intro}
+Este documento es una plantilla \LaTeX~ a utilizar para el informe de Proyecto Final del curso de Bases de Datos no Relacionales del Instituto de Computación de la Facultad de Ingeniería. Además de usar el documento como plantilla, en él se incluyen recomendaciones, tanto para la estructura como para el contenido del informe. El resto del documento se organiza de la siguiente forma. En la Sección \ref{escritura} se presentan recomendaciones a tener en cuenta a la hora de escribir el informe. Luego, en la Sección \ref{formato} se sugieren estrategias para dar formato a Cuadros, Figuras y Código, así como recomendaciones para la gestión de la bibliografía. Por último, en la Sección \ref{secciones} se presenta la estructura que debería seguir el informe, describiendo el contenido que cada sección debería tener. 
+
+\section{Recomendaciones para la escritura}
+\label{escritura}
+
+A continuación resumo algunas recomendaciones de escritura, tomadas de \cite{Laurenzo} y \cite{Nesmachnow2006}.
+
+\begin{itemize}
+	\item Sólo citar y referenciar fuentes reconocidas y respetables (nunca a la Wikipedia. Tener en cuenta que la Wikipedia suele incluir referencias que sí pueden ser utilizadas.)
+	
+	\item Escribir formalmente, evitando el lenguaje coloquial y los relatos anecdóticos del proyecto. Recordar que, en general, se están documentando los resultados y no el proceso mediante el cual se llegó a ellos.
+	
+	\item La documentación es un trabajo formal. Esto implica que cualquier cosa que afirmen deberá o ser de sentido común, o estar demostrada por ustedes, o contar con una referencia que la avale.
+	
+	\item Utilizar español siempre que sea posible. Cuando no existe un equivalente en español, poner la palabra en el idioma foráneo en itálica.
+	
+	\item Evitar la castellanización de palabras en inglés (randómico por aleatorio, customizar por personalizar, zoomear o hacer zoom por ampliar, mandatorio por obligatorio, etc.).
+	
+	\item De igual forma, tener particular cuidado con los falsos amigos, es decir, palabras en un idioma que tienen, en otro idioma, otra de sonido similar y significado distinto. Por ejemplo: \textit{library} es similar a librería, pero no significan lo mismo. La traducción de \textit{library} al castellano es biblioteca. 
+	
+	\item Utilizar algún editor de texto que incluya un buen corrector ortográfico. Agregar sistemáticamente las palabras que no tenga.
+	
+	\item La conjugación verbal debe ser coherente (p.ej.: evitar poner "se hizo", y luego "hicimos").
+	
+	\item Tener cuidado con las tildes diacríticas (sé, se; sí, si; más, mas; él, el; tú, tu; etc.).
+	
+	\item Recordar que la palabra "o" sólo lleva tilde cuando se encuentra entre números.
+	\item Los números se escriben con letras y no con dígitos (``tres'', en lugar de 3), excepto en los casos en los que el número sea parte del nombre (``figura 1''), o cuando sea una palabra compuesta (en lugar de ``treinta y uno'', se deberá escribir 31).
+	
+	\item No utilizar abreviaturas innecesarias. Si se utilizan siglas, en la primera mención se pondrá su forma desarrollada seguida de la sigla entre paréntesis, sin puntos de separación; por ejemplo: Intendencia de Montevideo (IM).
+	
+	\item Tener en cuenta que el uso de expresiones como ``la misma'', ``el mismo'', ``de la misma'' puede evitarse, en algunos casos sencillamente eliminando la expresión y en otros modificando ligeramente la frase. Por ejemplo: ``Se determina el tipo de documento basándose en la estructura del mismo", puede sustituirse por ``Se determina el tipo de documento basándose en su estructura". O ``Como no se conoce la estructura del documento, es necesario realizar un análisis sintáctico del mismo", puede sustituirse por ``Como no se conoce la estructura del documento, es necesario realizar un análisis sintáctico". Esto no quiere decir que su uso sea erróneo, mas sí su abuso.
+	
+	\item Salvo contadas excepciones, los prefijos no llevan guion (``-"). Así, se debe escribir examante, proaborto, anticlerical, etc. Sin embargo, sí se unen con guion a la palabra base cuando esta comienza por mayúscula (pos-Mujica), o antes de un número (sub-20). Finalmente, se deja un espacio cuando el prefijo afecta a una base pluriverbal (varias palabras), como en pre mundial del treinta o vice primer ministro.
+	
+	\item No omitir ni olvidar las tildes en las letras mayúsculas.
+	
+	\item Nunca utilizar subrayado.
+	
+	\item Por lo general, que estén pegados títulos y subtítulos no es bueno. Al tratarse de un informe y no de un manual, son necesarios ilación y estilo tales que permitan transmitir lo hecho sin aburrir al lector.
+	
+	\item No dejen espacios entre los párrafos o luego de los títulos agregando retornos de carro, sino definiendo estilos. Recuerden que hay una jerarquía de títulos. Utilicen las leyendas en las tablas, fotografías y figuras y siempre refiéranse a ellas mediante referencias cruzadas. 
+	
+	
+\end{itemize}
+
+
+\section{Formatos y Bibliografía}
+\label{formato}
+
+\subsection{Imágenes y Tablas} Se sugiere ubicar las imágenes y tablas al comienzo o final de la página, usando las directivas t o b. 
+Todas las Imágenes y Tablas deben tener una leyenda (\textit{caption}), una etiqueta, y deben estar referenciadas en el texto explicando su contenido.
+Se sugiere insertar las figuras luego de haber sido mencionadas en el texto (Ejemplo, ` La Figura~\ref{fig} muestra un triángulo'').
+Para que una tabla o imagen abarque más de una columna, pueden usar la directiva table* o figure*. 
+
+\begin{table}[b]
+	\caption{Diferentes estilos en una tabla}
+	\begin{center}
+		\begin{tabularx}{\linewidth}{|X|X|X|X|}
+			\hline
+			\textbf{Encabezado de Tabla}&\multicolumn{3}{|c|}{\textbf{Encabezado de columna}} \\
+			\cline{2-4} 
+			\textbf{RRR} & \textbf{\textit{COL1}}& \textbf{\textit{COL2}}& \textbf{\textit{COL3}} \\
+			\hline
+			AAA& BBB$^{\mathrm{a}}$& &  \\
+			\hline
+			\multicolumn{4}{l}{$^{\mathrm{a}}$Ejemplo de nota al pie en tabla.}
+		\end{tabularx}
+		\label{tab1}
+	\end{center}
+\end{table}
+
+\begin{figure}[t]
+	\centerline{\includegraphics[width=0.5\textwidth]{imagenes/triangulo.png}}
+	\caption{Esto es un triángulo.}
+	\label{fig}
+\end{figure}
+
+\subsection{Código y algoritmos}
+Para mostrar código se sugiere usar el paquete \textit{listings}. Se brinda una configuración básica (ver el comando \texttt{lstset} en el preámbulo de este documento), pero este paquete permite por ejemplo configurar el lenguaje que se usa, y hacer por ejemplo coloreado de sintaxis. Se incluye en este documento una configuración para Python y otra para SPARQL que se usan en los Listados \ref{codigo1} y \ref{codigo2}). Se recomienda ampliar info aquí\footnote{Latex wikibook \url{https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings}}.
+
+\begin{sflisting}[style=python, caption= Ejemplo de código Python,label=codigo1]
+	if x==0:
+	print(x)
+	
+\end{sflisting}
+
+\begin{sflisting}[style=sparql,caption= Ejemplo de consulta SPARQL,label=codigo2]
+	SELECT ?o2
+	WHERE { s p1 ?o1.
+		?o1 p2 ?o2
+	}
+\end{sflisting}
+
+
+\subsection{Gestión de la bibliografía}
+
+Todos los trabajos que usen en la elaboración del informe deben estar adecuadamente citados. Si trabajan en \LaTeX, mantengan un archivo \texttt{.bib} con entradas de buena calidad. Estas entradas se pueden descargar de las editoriales (ej: via IEEEExplore). La colección bibliográfica puede gestionarse en forma manual, editando el archivo, o con una herramienta como JabRef\footnote{\url{https://www.jabref.org/}}, Mendeley\footnote{\url{https://www.mendeley.com/download-desktop/}} , o Zotero \footnote{\url{https://www.zotero.org/}}. Éste último posee \textit{plug-ins} para otros editores como LibreOffice y MS Word.
+
+Las entradas en formato Bibtex deben agregarse al archivo plantillaBDNR.bib.
+
+
+\section{Secciones del informe}
+\label{secciones}
+
+Se propone que el informe se organice en las secciones que se describen a continuación, pudiéndose agregar más de ser necesario. Esta estructura está inspirada en las recomendaciones para la elaboración de Informes de Proyecto de Grado del Instituto de Computación \cite{Proygrado} 
+
+
+\subsection{Introducción}
+\label{intro}
+
+En esta sección se motiva el trabajo, se plantea y define el problema, se deja claro   cuales   son   los   objetivos   (general y los   específicos),  se  plantean  los resultados esperados, se establecen resumidamente las conclusiones y se describe la organización general del documento.
+
+\subsection{Trabajos relacionados}
+\label{relacionados}
+Revisión de antecedentes (ya sea productos, procesos, publicaciones, etc., a nivel académico   o   comercial)   en   el   tema   del   trabajo.   Puede   incluir   además   (si   es necesario)   una   breve   introducción   a   los   conceptos   necesarios   para   entender   eltrabajo.
+
+\subsection{Parte central}
+\label{desarrollo}
+La  parte central  del   trabajo   refiere   a   lo   que   es   producción   propia   o   aporte   del proyecto, incluyendo las decisiones tomadas. Por ejemplo, puede incluir los requerimientos, el análisis y el diseño de la solución. Si el proyecto tiene una implementación, debe describirse en términos de decisiones tomadas en ese sentido. Claramente la sección no se llama Parte Central, uds deberán buscar un nombre adecuado. Tener en cuenta que los detalles de programación se dejan para un anexo y en caso de haber desarrollado código éste debe quedar disponible en un repositorio Gitlab\footnote{\url{https://gitlab.fing.edu.uy/}}.
+
+\subsection{Experimentación}
+\label{expe}
+Experimentación, incluyendo   las   pruebas   realizadas   (casos   de   prueba)   y   los resultados obtenidos con su respectivo análisis, que puede incluir comparaciones. En caso de corresponder, se deberá indicar claramente que conjuntos de datos se usaron para las pruebas, y hacerlos disponibles (por ejemplo, mediante un link a los datos originales o subiéndolos a Gitlab en el caso de datos propios.)
+
+\subsection{Conclusiones y trabajo futuro}
+\label{conclusion}
+Se   evalúan   los   resultados   alcanzados    y dificultades   encontradas,   se   establece   lo   que   se   planteó   hacer   y   lo   que   se   hizo realmente, cuales fueron los aportes, se  muestran posibles extensiones al trabajo, s realiza una autocrítica de lo que se hizo y lo que faltó (por problemas de tiempo,recursos, cómo se puede continuar, qué cosas hacer, prioridades, etc.) y se incluye información sobre la gestión del proyecto, si aplica.
+
+
+
+
+%\bibliographystyle{plainnat}
+\bibliographystyle{plain}
+\bibliography{plantillaBDNR}
+
+
+\end{document}
