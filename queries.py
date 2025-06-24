@@ -105,6 +105,27 @@ class UdegraphQueries:
         LIMIT 20
         """
 
+    # 9. Get top 10 duos of people who have collaborated
+    def get_top_duos_query(self):
+        return """
+        MATCH (p1:Person)-[]->(w:Work)<-[]-(p2:Person)
+        WHERE elementId(p1) < elementId(p2)
+        RETURN p1.normalized_name as person1,
+            p2.normalized_name as person2,
+            count(w) as collaborations
+        ORDER BY collaborations DESC
+        LIMIT 10
+        """
+
+    # 10. Get all coauthors of a specific person
+    def get_person_coauthors_query(self, person_name):
+        return """
+        MATCH (p:Person {normalized_name: $person_name})-[:AUTHOR_OF]->(w:Work)<-[:AUTHOR_OF]-(coauthor:Person)
+        WHERE p <> coauthor
+        RETURN DISTINCT coauthor
+        ORDER BY coauthor.normalized_name
+        """
+
     def close(self):
         if self.driver is not None:
             self.driver.close()
@@ -180,7 +201,7 @@ if __name__ == "__main__":
             print(f"  Number of coauthors: {record['coauthors_count']}")
         print()
 
-        # 5. Path between two people: Graciana Castro and Lorena Etcheverry
+        # 5. Path between two people: Graciana Castro and Julian O'Flaherty
         person1 = "graciana castro"
         person2 = "julian o'flaherty"
         print(f"🔹 Shortest path between {person1} and {person2}:")
@@ -236,5 +257,28 @@ if __name__ == "__main__":
             works_count = record["works_count"]
             print(f"  Keyword: {keyword}, Number of Works: {works_count}")
         print()
+
+        # 9. Get top 10 duos
+        print("🔹 Top 10 duos:")
+        result = session.run(query.get_top_duos_query())
+        for record in result:
+            person1 = record["person1"]
+            person2 = record["person2"]
+            collaborations = record["collaborations"]
+            print(f"  Duo: {person1} & {person2}, Collaborations: {collaborations}")
+        print()
+
+        # 10. Get coauthors of a specific person
+        person_name = "daniel bia"
+        print(f"🔹 Coauthors of {person_name}:")
+        result = session.run(
+            query.get_person_coauthors_query(person_name), {"person_name": person_name}
+        )
+        for record in result:
+            coauthor = record["coauthor"]
+            name = coauthor.get(
+                "aliases", [coauthor.get("normalized_name", "Unknown")]
+            )[0]
+            print(f"  Coauthor: {name}")
 
         query.close()
