@@ -23,7 +23,11 @@ def load_colibri_data(data_dir: Path = Path("data/colibri")) -> pl.DataFrame:
     all_paths = data_dir.glob("**/*.jsonl")
     data = []
     for path in all_paths:
-        if "Facultad de Ingeniería" not in str(path):
+        if "Facultad de Ingeniería" not in str(path) or not (
+            "Eléctrica" in str(path)
+            or "Mecánica" in str(path)
+            or "Computación" in str(path)
+        ):
             continue
         with open(path, "r") as f:
             for line in f:
