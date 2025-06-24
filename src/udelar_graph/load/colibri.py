@@ -244,7 +244,7 @@ def populate_graph_colibri(
     )
 
     work_types = get_work_types(data)
-    work_types_string = {wt[1].type for wt in work_types}
+    work_types_string = set({wt[1].type for wt in work_types})
     work_keywords = get_work_keywords(data, work_types_string)
 
     logger.info(f"Creating {len(people)} people")
@@ -255,7 +255,13 @@ def populate_graph_colibri(
     repository.create_authorship_relationship_batch(authorship_relations)
     logger.info(f"Creating {len(contributor_relations)} contributor relations")
     repository.create_contributor_relationship_batch(contributor_relations)
-    logger.info(f"Creating {len(work_types)} work types")
+    logger.info(
+        f"Creating {len(work_types_string)} work types and {len(work_types)} "
+        "WorkType relations"
+    )
     repository.create_work_type_batch(work_types)
-    logger.info(f"Creating {len(work_keywords)} work keywords")
+    logger.info(
+        f"Creating {len(set(wk[1].keyword for wk in work_keywords))} work keywords and "
+        f"{len(work_keywords)} WorkKeyword relations"
+    )
     repository.create_work_keyword_batch(work_keywords)

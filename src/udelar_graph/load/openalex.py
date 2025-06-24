@@ -240,7 +240,7 @@ def load_openalex_works(
         pl.col("authors_normalized")
         .list.filter(pl.element().is_in(oa_to_existing_mapping.keys()))
         .list.len()
-        > 1
+        > 0
     )
 
     openalex_works = data.select(
