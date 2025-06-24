@@ -75,40 +75,19 @@ class UdegraphQueries:
         LIMIT 1
         """
 
-    # 5. Person with lowest distance to everyone
-    def get_person_with_lowest_distance_query(self):
-        return """
-        MATCH (p:Person)
-        WITH p, COUNT { (p)-[:AUTHOR_OF|CONTRIBUTOR_OF*1..]->(:Person) } AS distance
-        RETURN p, distance
-        ORDER BY distance ASC
-        LIMIT 1
-        """
-
-    # 6. Shortest path between two people
-    def get_shortest_paths_between_people_query(self, person1, person2, max_length=6):
+    # 5. Shortest path between two people
+    def get_shortest_paths_between_people_query(self, person1, person2, max_length=30):
         return f"""
         MATCH
-          // Encuentra el nodo de inicio y fin usando los parámetros
           (p1:Person {{normalized_name: $person1}}),
           (p2:Person {{normalized_name: $person2}}),
-          // Busca el camino más corto usando la función shortestPath
           path = shortestPath(
-            // El patrón del camino, con la longitud máxima insertada como un literal
             (p1)-[:AUTHOR_OF|CONTRIBUTOR_OF*1..{max_length}]-(p2)
           )
-        // Devuelve el camino completo encontrado
         RETURN path
         """
 
-    # 7. Get all work types
-    def get_possible_work_types_query(self):
-        return """
-        MATCH (wt:WorkType)
-        RETURN wt
-        """
-
-    # 8. Get number of works by type
+    # 7. Get number of works by type
     def get_number_of_works_by_type_query(self):
         return """
         MATCH (w:Work)-[:TYPE]->(wt:WorkType)
@@ -116,9 +95,43 @@ class UdegraphQueries:
         ORDER BY works_count DESC
         """
 
+    # 8. Get top 10 most used keywords that are not None
+    def get_top_keywords_query(self):
+        return """
+        MATCH (w:Work)-[:KEYWORD]->(k:Keyword)
+        WHERE k <> "None"
+        RETURN k, COUNT(w) AS works_count
+        ORDER BY works_count DESC
+        LIMIT 20
+        """
+
     def close(self):
         if self.driver is not None:
             self.driver.close()
+
+
+def print_collaboration_path(path):
+    """
+    Función auxiliar para imprimir un camino de colaboración de forma legible.
+    """
+    nodes = path.nodes
+    relationships = path.relationships
+
+    for i, node in enumerate(nodes):
+        if "Person" in node.labels:
+            print(
+                f"({i}) Person: {node.get('normalized_name', 'Nombre no disponible')}"
+            )
+        elif "Work" in node.labels:
+            print(f"({i}) Work: {node.get('normalized_title', 'Título no disponible')}")
+
+        if i < len(relationships):
+            rel = relationships[i]
+            if rel.start_node == node:
+                arrow = f"-[{rel.type}]->"
+            else:
+                arrow = f"<-[{rel.type}]-"
+            print(f"     {arrow}")
 
 
 if __name__ == "__main__":
@@ -167,19 +180,9 @@ if __name__ == "__main__":
             print(f"  Number of coauthors: {record['coauthors_count']}")
         print()
 
-        # 5. Person with lowest distance
-        print("🔹 Person with the lowest distance to everyone:")
-        result = session.run(query.get_person_with_lowest_distance_query())
-        for record in result:
-            person = record["p"]
-            name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
-            print(f"  Name: {name}")
-            print(f"  Distance: {record['distance']}")
-        print()
-
-        # 5. Path between two people: Graciana Castro and Julian O'Flaherty
+        # 5. Path between two people: Graciana Castro and Lorena Etcheverry
         person1 = "graciana castro"
-        person2 = "lorena etcheverry"
+        person2 = "julian o'flaherty"
         print(f"🔹 Shortest path between {person1} and {person2}:")
         result = session.run(
             query.get_shortest_paths_between_people_query(
@@ -187,13 +190,23 @@ if __name__ == "__main__":
             ),
             {"person1": person1, "person2": person2},
         )
-        for record in result:
-            path = record["path"]
-            print(f"  Path: {path}")
+        path_record = result.single()
+
+        if path_record:
+            path_object = path_record["path"]
+            print(f"Path length: {len(path_object.relationships)}")
+
+            grados_separacion = len(path_object.relationships) / 2
+            print(f"Separation grades: {int(grados_separacion)}")
+
+            print_collaboration_path(path_object)
+
+        else:
+            print(f"No path was found between '{person1}' and '{person2}'.")
         print()
 
         # 6. Get works by a specific person
-        person_name = "graciana castro"
+        person_name = "julian o'flaherty"
         print(f"🔹 Works by {person_name}:")
         result = session.run(
             query.get_person_works_query(person_name), {"person_name": person_name}
@@ -206,31 +219,22 @@ if __name__ == "__main__":
                 print(f"  Abstract: {work['abstract']}")
         print()
 
-        # 7. Get all people
-        print("🔹 All people in the database:")
-        result = session.run(query.get_all_people_query())
-        for record in result:
-            person = record["p"]
-            print(f"{person}")
-
-        print()
-
-        # 8. Get all work types:
-        print("🔹 Possible work types:")
-        result = session.run(query.get_possible_work_types_query())
-        for record in result:
-            work_type = record["wt"]["type"]
-            print(f"  Work Type: {work_type}")
-
-        print()
-
-        # 9. Get number of works by type
+        # 7. Get number of works by type
         print("🔹 Number of works by type:")
         result = session.run(query.get_number_of_works_by_type_query())
         for record in result:
             work_type = record["wt"]["type"]
             works_count = record["works_count"]
             print(f"  Work Type: {work_type}, Number of Works: {works_count}")
+        print()
+
+        # 8. Get top 20 most used keywords
+        print("🔹 Top 20 most used keywords:")
+        result = session.run(query.get_top_keywords_query())
+        for record in result:
+            keyword = record["k"]["keyword"]
+            works_count = record["works_count"]
+            print(f"  Keyword: {keyword}, Number of Works: {works_count}")
         print()
 
         query.close()

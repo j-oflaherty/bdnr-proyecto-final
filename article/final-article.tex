@@ -143,7 +143,7 @@ En esta sección se describe el proceso de diseño e implementación de la base 
 \subsection{Obtención y Preprocesamiento de Datos}
 El primer paso del proyecto fue la recolección de datos. Para ello, se desarrollaron herramientas de extracción automatizada (\textit{scraping}) en Python, organizadas en el módulo \texttt{udelar\_graph/extraction}. Las fuentes utilizadas fueron Colibrí y OpenAlex.
 
-Colibrí es el \textit{``repositorio institucional de la Universidad de la República''}, donde se pueden encontrar proyectos de fin de carrera, tesis, artículos de investigación, entre otros. Para obtener los registros del mismo se implementó un scraper utilizando la librería de python \emph{Scrapy}~\cite{scrapy} que recorre las páginas del repositorio, identificaba los registros relevantes en el HTML y los guarda en formato \emph{JSONL}.  
+Colibrí es el \textit{``repositorio institucional de la Universidad de la República''}, donde se pueden encontrar proyectos de fin de carrera, tesis, artículos de investigación, entre otros. Para obtener los registros del mismo se implementó un scraper utilizando la librería de python \emph{Scrapy}~\cite{scrapy} que recorre las páginas del repositorio, identificaba los registros relevantes en el HTML y los guarda en formato \emph{JSONL}.
 Posteriormente, estos archivos fueron procesados para extraer información estructurada como autores, títulos y afiliaciones. El primer inconveniente que se encontró fue la existencia de autores duplicados con nombres similares, por ejemplo, \textit{Etcheverry, Lorena}, \textit{Echeverry, Lorena} y \textit{Etcheverry Venturini, Lorena}. Para resolver este problema, se implementó un algoritmo de agrupamiento de nombres a base de heurísticas para hacer una primera reducción, y luego se utilizó un modelo de lenguaje (\emph{GPT-4o-mini}) para obtener un nombre y apellido para cada grupo de nombres. Este último paso de estructuración permite reducir aún más la cantidad de duplicados en el grafo, y será útil para la conexión con los datos extraídos de OpenAlex.
 
 OpenAlex~\cite{Priem2022OpenAlex} es un índice que colecta información de publicaciones, autores, instituciones, y más, y ofrece la capacidad de hacer búsquedas sobre la misma. La extracción de datos se realizó de la forma más simple, buscando todos los trabajos asociados con la Universidad de la República y descargando los resultados en formato \emph{CSV}. Para poder filtrar solo los trabajos asociados a investigadores y estudiantes de la FING, se supuso que toda persona afiliada a la FING tiene al menos un registro en Colibrí. Con esta hipótesis, se realizó un matcheo de nombres entre personas de ambas fuentes y se descartaron todos los trabajos que no tengan afiliados en la FING. En la Tabla~\ref{tab:datos} se puede ver el resumen de los datos obtenidos de ambas fuentes.
@@ -154,8 +154,8 @@ OpenAlex~\cite{Priem2022OpenAlex} es un índice que colecta información de publ
 		\toprule
 		\textbf{Fuente} & \textbf{Personas} & \textbf{Trabajos} & \textbf{Autorías} & \textbf{Tutorías} \\
 		\midrule
-		Colibrí & 5173 & 3974 & 11180 & 3398 \\
-		OpenAlex & - & 8123 & 14596 & - \\
+		Colibrí         & 5173              & 3974              & 11180             & 3398              \\
+		OpenAlex        & -                 & 8123              & 14596             & -                 \\
 		\midrule
 	\end{tabular}
 	\caption{Resumen de los datos de personas y trabajos obtenidos de las fuentes.}
