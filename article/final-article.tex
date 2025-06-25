@@ -128,13 +128,13 @@ El análisis de la producción científica y las redes de colaboración académi
 
 En este contexto, el objetivo de este proyecto fue el diseño e implementación de una base de datos de grafos para centralizar y estructurar la información sobre los individuos y sus trabajos académicos en la Facultad de Ingeniería (Fing) de la Universidad de la República (UdelaR). Se buscó construir una herramienta que permitiera a investigadores, estudiantes y administradores analizar las redes de conocimiento de la institución de manera ágil e intuitiva.
 
-Por tratarse de un trabajo de fin de curso, el alcance del proyecto se acotó a un subconjunto representativo y manejable del universo de datos. La población de estudio se limitó a los individuos (docentes y estudiantes) afiliados a tres institutos de la Fing: el Instituto de Ingeniería Eléctrica (IIE), el Instituto de Matemática y Estadística Rafael Laguardia (IMERL) y el Instituto de Computación (INCO) con trabajos publicados en Colibrí. Para ampliar y validar la información, se utilizó como fuente secundaria OpenAlex.
+Por tratarse de un trabajo de fin de curso, el alcance del proyecto se acotó a un subconjunto representativo y manejable del universo de datos. La población de estudio se limitó a los individuos de la Facultad de Ingeniería con trabajos publicados en Colibrí. Para ampliar la cantidad de trabajos de cada persona, se utilizó como fuente secundaria OpenAlex, pero no se incluyeron más individuos.
 
 Este artículo detalla el proceso de construcción de dicha base de datos, desde la extracción de datos hasta la implementación del modelo de grafo, y demuestra su utilidad a través de ejemplos de consulta y análisis. El trabajo se organiza de la siguiente manera: la sección \ref{relacionados} revisa los antecedentes; la sección \ref{desarrollo} describe la metodología de diseño e implementación; la sección \ref{expe} presenta los resultados obtenidos, y finalmente, la sección \ref{conclusion} expone las conclusiones y líneas de trabajo futuro.
 
 \section{Trabajos Relacionados}
 \label{relacionados}
-Existen antecedentes en el modelado de información académica mediante grafos, como la \textit{dblp computer science bibliography}\footnote{\url{https://dblp.org/}}, una base de datos de publicaciones del área de la informática que estructura la información en un grafo RDF. Su enfoque sirvió como modelo conceptual para nuestro sistema. Una inspiración directa fue el trabajo de fin de curso "El número Abreu" \cite{abreu2023}, realizado en 2023 para la asignatura Bases de Datos no Relacionales, que implementa la exploración de redes de jugadores de futbol y motivó la ejecución de una red similar para la comunidad académica de la Fing.
+Existen antecedentes en el modelado de información académica mediante grafos, como la \textit{dblp computer science bibliography}\footnote{\url{https://dblp.org/}}, una base de datos de publicaciones del área de la informática que estructura la información en un grafo RDF. Su enfoque sirvió como modelo conceptual para nuestro sistema. Una inspiración directa fue el trabajo de fin de curso "El número Abreu" \cite{abreu2023}, realizado en 2023 para la asignatura Bases de Datos no Relacionales, que implementó la exploración de redes de jugadores de futbol y motivó la ejecución de una red similar para la comunidad académica de la Fing.
 
 \section{Parte central}
 \label{desarrollo}
@@ -143,10 +143,10 @@ En esta sección se describe el proceso de diseño e implementación de la base 
 \subsection{Obtención y Preprocesamiento de Datos}
 El primer paso del proyecto fue la recolección de datos. Para ello, se desarrollaron herramientas de extracción automatizada (\textit{scraping}) en Python, organizadas en el módulo \texttt{udelar\_graph/extraction}. Las fuentes utilizadas fueron Colibrí y OpenAlex.
 
-Colibrí es el \textit{``repositorio institucional de la Universidad de la República''}, donde se pueden encontrar proyectos de fin de carrera, tesis, artículos de investigación, entre otros. Para obtener los registros del mismo se implementó un scraper utilizando la librería de python \emph{Scrapy}~\cite{scrapy} que recorre las páginas del repositorio, identificaba los registros relevantes en el HTML y los guarda en formato \emph{JSONL}.
-Posteriormente, estos archivos fueron procesados para extraer información estructurada como autores, títulos y afiliaciones. El primer inconveniente que se encontró fue la existencia de autores duplicados con nombres similares, por ejemplo, \textit{Etcheverry, Lorena}, \textit{Echeverry, Lorena} y \textit{Etcheverry Venturini, Lorena}. Para resolver este problema, se implementó un algoritmo de agrupamiento de nombres a base de heurísticas para hacer una primera reducción, y luego se utilizó un modelo de lenguaje (\emph{GPT-4o-mini}) para obtener un nombre y apellido para cada grupo de nombres. Este último paso de estructuración permite reducir aún más la cantidad de duplicados en el grafo, y será útil para la conexión con los datos extraídos de OpenAlex.
+Colibrí es el \textit{``repositorio institucional de la Universidad de la República''}, donde se pueden encontrar proyectos de fin de carrera, tesis, artículos de investigación, entre otros. Para obtener los registros del mismo se implementó un scraper utilizando la librería de Python \emph{Scrapy}~\cite{scrapy} que recorrió las páginas del repositorio, identificó los registros relevantes en el HTML y los guardó en formato \emph{JSONL}.
+Posteriormente, estos archivos fueron procesados para extraer información estructurada como autores, títulos y afiliaciones. El primer inconveniente que se encontró fue la existencia de autores duplicados con nombres similares, por ejemplo, \textit{Etcheverry, Lorena}, \textit{Echeverry, L} y \textit{Etcheverry Venturini, Lorena}. Para resolver este problema, se implementó un algoritmo de agrupamiento de nombres a base de heurísticas para hacer una primera reducción, y luego se utilizó un modelo de lenguaje (\emph{GPT-4o-mini}) para obtener un nombre y apellido para cada grupo de nombres. Este último paso de estructuración permite reducir aún más la cantidad de duplicados en el grafo y es útil para la conexión con los datos extraídos de OpenAlex.
 
-OpenAlex~\cite{Priem2022OpenAlex} es un índice que colecta información de publicaciones, autores, instituciones, y más, y ofrece la capacidad de hacer búsquedas sobre la misma. La extracción de datos se realizó de la forma más simple, buscando todos los trabajos asociados con la Universidad de la República y descargando los resultados en formato \emph{CSV}. Para poder filtrar solo los trabajos asociados a investigadores y estudiantes de la FING, se supuso que toda persona afiliada a la FING tiene al menos un registro en Colibrí. Con esta hipótesis, se realizó un matcheo de nombres entre personas de ambas fuentes y se descartaron todos los trabajos que no tengan afiliados en la FING. En la Tabla~\ref{tab:datos} se puede ver el resumen de los datos obtenidos de ambas fuentes.
+OpenAlex~\cite{Priem2022OpenAlex} es un índice que colecta información de publicaciones, autores, instituciones y más, y ofrece la capacidad de hacer búsquedas sobre la misma. La extracción de datos se realizó de la forma más simple, buscando todos los trabajos asociados con la Universidad de la República y descargando los resultados en formato \emph{CSV}. Para poder filtrar solo los trabajos asociados a investigadores y estudiantes de la Fing, se supuso que toda persona afiliada a la Fing tiene al menos un registro en Colibrí. Con esta hipótesis, se realizó un matcheo de nombres entre personas de ambas fuentes y se descartaron todos los trabajos que no tuvieran afiliados en la Fing. En la Tabla~\ref{tab:datos} se puede ver el resumen de los datos obtenidos de ambas fuentes.
 
 \begin{table}[h]
 	\centering
@@ -163,7 +163,6 @@ OpenAlex~\cite{Priem2022OpenAlex} es un índice que colecta información de publ
 \end{table}
 
 \subsection{Modelado y Carga del Grafo}
-
 Para el modelado se optó por un grafo de propiedades, gestionado con la base de datos Neo4j. En este modelo, los nodos representan entidades (Personas, Trabajos, Tipos de Trabajo y Palabras Clave) y las relaciones modelan los vínculos entre ellas (autoría, contribución, tipo y palabra clave). La Figura~\ref{fig:grafo} ilustra el esquema del grafo implementado.
 
 \begin{figure}[h]
@@ -178,28 +177,28 @@ La relación \texttt{AUTHOR\_OF} conecta a los investigadores con los artículos
 La carga de los datos se automatizó mediante scripts de Python que utilizan la biblioteca oficial de Neo4j. El proceso, encapsulado en el módulo \texttt{udelar\_graph/load/colibri.py}, transforma los datos preprocesados en nodos y relaciones mediante consultas Cypher. Para facilitar la ejecución, se implementó una interfaz de línea de comandos (CLI) con la biblioteca Typer. El comando \texttt{colibri-load} permite poblar la base de datos, incluyendo una opción para limpiarla previamente y así garantizar la reproducibilidad de los experimentos. Una vez cargados los datos de Colibrí, se ejecutó el comando \texttt{openalex-load} para integrar los datos de OpenAlex.
 
 \subsection{Limitaciones}
-El desarrollo del sistema enfrentó limitaciones inherentes a las fuentes de datos y al alcance del proyecto. La cobertura de Colibrí no es exhaustiva y presenta inconsistencias en sus metadatos. Aunque la integración con OpenAlex mitigó parcialmente este problema, la correspondencia entre registros no siempre fue directa. Por otra parte, el estudio se restringió a tres institutos de la Facultad, lo que limita la representatividad del grafo resultante. Finalmente, la implementación se realizó sobre una instancia local de Neo4j, con las consiguientes restricciones de escalabilidad. Estas limitaciones abren claras oportunidades para trabajo futuro, como la ampliación del conjunto de datos y la mejora de los procesos de limpieza y normalización.
+El desarrollo del sistema enfrentó limitaciones inherentes a las fuentes de datos y al alcance del proyecto. La cobertura de Colibrí no es exhaustiva y presenta inconsistencias en sus metadatos. Aunque la integración con OpenAlex mitigó parcialmente este problema, la correspondencia entre registros no siempre fue directa. Finalmente, la implementación se realizó sobre una instancia local de Neo4j, con las consiguientes restricciones de escalabilidad. Estas limitaciones abren claras oportunidades para trabajo futuro, como la ampliación del conjunto de datos y la mejora de los procesos de limpieza y normalización.
 
 \section{Experimentación}
 \label{expe}
-En esta sección se presentan ejemplos de consultas realizadas sobre el grafo, utilizando el lenguaje Cypher que se realizan para validar el modelo y demostrar la utilidad de la base de datos para el análisis de la producción académica. Además, se presenta un pequeño análisis de centralidad del grafo para el cual se implementaron distintos algoritmos y un identificación de comunidades.
+En esta sección se presentan ejemplos de consultas realizadas sobre el grafo, utilizando el lenguaje Cypher, realizadas para validar el modelo y demostrar la utilidad de la base de datos para el análisis de la producción académica. Además, se presenta un análisis de centralidad del grafo y de detección de comunidades.
 
 \subsection{Consultas relevantes}
-Se muestran a continuación algunos ejemplos de las consultas realizadas sobre el grafo. En este informe se detallarán aquellas consultas que se consideran más relevantes para demostrar la viabilidad y utilidad del grafo. Se encuentra en el repostorio del trabajo\footnote{\url{https://github.com/j-oflaherty/bdnr-proyecto-final}} un conjunto más completo de consultas que se pueden realizar.
+A continuación se muestran algunos ejemplos de las consultas realizadas sobre el grafo. En este informe se detallarán aquellas consultas que se consideran más relevantes para demostrar la viabilidad y utilidad del grafo. En el repositorio del trabajo\footnote{\url{https://github.com/j-oflaherty/bdnr-proyecto-final}} se encuentra un conjunto más completo de consultas que se pueden realizar.
 
 \subsubsection{Todos los trabajos de una determinada persona}
-Es de utilidad conocer toda la producción académica de una persona, para conocer cual fue su área de especialización a lo largo de su carrera. Para eso, se puede realizar la consulta mostrada a continuación:
+Es de utilidad conocer toda la producción académica de una persona, para conocer cuál fue su área de especialización a lo largo de su carrera. Para eso, se puede realizar la consulta mostrada a continuación:
 
-\begin{sflisting}[style=sparql,caption= Obtener los trabajos una persona,label=codigo2]
+\begin{sflisting}[style=sparql,caption= Obtener los trabajos de una persona,label=trabajos_persona]
 	MATCH (p:Person {normalized_name: $person_name})
 	-[:AUTHOR_OF]->(w:Work)
 	RETURN w
 \end{sflisting}
 
 \subsubsection{Persona con mayor cantidad de estudiantes tutoreados}
-Puede ser de interés para estudiantes en búsqueda de tutores para su proyecto final de grado, conocer qué docentes poseen experiencia en la tarea. Para eso, se puede consultar las personas con más estudiantes tutoreados, teniendo en cuenta que se identifican aquellas personas que tutorearon un trabajo con la relación \texttt{CONTRIBUTOR\_OF}. Para obtener el top cinco de docentes con mayor cantidad de estudiantes, se debe realizar la siguiente consulta:
+Puede ser de interés para estudiantes en búsqueda de tutores para su proyecto final de grado, conocer qué docentes poseen experiencia en la tarea. Para eso, se puede consultar a las personas con más estudiantes tutoreados, teniendo en cuenta que se identifican aquellas personas que tutorearon un trabajo con la relación \texttt{CONTRIBUTOR\_OF}. Para obtener el top cinco de docentes con mayor cantidad de estudiantes, se debe realizar la siguiente consulta:
 
-\begin{sflisting}[style=sparql,caption= Docentes con mayor cantidad de estudiantes tutoreados,label=codigo2]
+\begin{sflisting}[style=sparql,caption= Docentes con mayor cantidad de estudiantes tutoreados,label=docentes_con_mas_estudiantes]
 	MATCH (p:Person)-[:CONTRIBUTOR_OF]->(w:Work)
 	<-[:AUTHOR_OF]-(a:Person)
 	RETURN p, COUNT(DISTINCT a) AS students_count
@@ -210,20 +209,20 @@ Puede ser de interés para estudiantes en búsqueda de tutores para su proyecto 
 \subsubsection{\textit{Keywords} más frecuentes}
 Identificar las \textit{keywords} más frecuentes puede ser importante para conocer los temas de interés dentro de un centro académico. Para el grafo implementado, esto se puede obtener con la siguiente consulta, con la que se obtienen las veinte \textit{keywords} más utilizadas:
 
-\begin{sflisting}[style=sparql,caption= \textit{Keywords} más frecuentes,label=codigo2]
+\begin{sflisting}[style=sparql,caption= \textit{Keywords} más frecuentes,label=keywords]
 	MATCH (w:Work)-[:KEYWORD]->(k:Keyword)
-	WHERE k <> "None"
+	WHERE k.keyword <> "None"
 	RETURN k, COUNT(w) AS works_count
 	ORDER BY works_count DESC
 	LIMIT 20
 \end{sflisting}
 
-Corriendo la consulta, se observa que dos de los conceptos que más aparecen son \textbf{aprendizaje automático} y \textit{\textbf{machine learning}}, que muestra la importancia que tiene esta área para la Facultad de Ingeniería.
+Al ejecutar la consulta, se observa que dos de los conceptos que más aparecen son \textbf{aprendizaje automático} y \textit{\textbf{machine learning}}, lo que muestra la importancia que tiene esta área para la Facultad de Ingeniería.
 
 \subsubsection{Dúo dinámico}
-En este caso, la consulta implementada responde la pregunta: ¿quiénes son las diez parejas con mayor producción académica en conjunto?
+En este caso, la consulta implementada responde a la pregunta: ¿quiénes son las diez parejas con mayor producción académica en conjunto?
 
-\begin{sflisting}[style=sparql,caption= Parejas con mayor cantidad de artículos publicados en conjunto,label=codigo2]
+\begin{sflisting}[style=sparql,caption= Parejas con mayor cantidad de artículos publicados en conjunto,label=duo_dinamico]
 	MATCH (p1:Person)-[]->(w:Work)<-[]-(p2:Person)
 	WHERE elementId(p1) < elementId(p2)
 	RETURN p1.normalized_name as person1,
@@ -234,9 +233,9 @@ En este caso, la consulta implementada responde la pregunta: ¿quiénes son las 
 \end{sflisting}
 
 \subsubsection{Camino más corto entre dos personas}
-Para analizar a una comunidad y sus actores, también es util poder identificar el camino que hay entre dos de ellos. En este caso, las personas están vinculadas a través de los trabajos de los que fueron parte, ya sea como autores o como tutores. Para esto, se implementó la siguiente consulta que devuelve el camino más corto entre dos personas:
+Para analizar una comunidad y sus actores, también es útil poder identificar el camino que hay entre dos de ellos. En este caso, las personas están vinculadas a través de los trabajos de los que fueron parte, ya sea como autores o como tutores. Para esto, se implementó la siguiente consulta que devuelve el camino más corto entre dos personas:
 
-\begin{sflisting}[style=sparql,caption= Parejas con mayor cantidad de artículos publicados en conjunto,label=codigo2]
+\begin{sflisting}[style=sparql,caption= Camino más corto entre dos personas,label=camino_corto]
 	MATCH
 	(p1:Person {{normalized_name: $person1}}),
 	(p2:Person {{normalized_name: $person2}}),
@@ -246,22 +245,23 @@ Para analizar a una comunidad y sus actores, también es util poder identificar 
 	RETURN path
 \end{sflisting}
 
-La respuesta muestra un camino intercalado de personas y trabajos. El largo mínimo de camino será uno, ya que entre dos personas siempre deberá haber un trabajo entre medio (para el caso de coautores).
+La respuesta muestra un camino intercalado de personas y trabajos. La longitud mínima del camino será dos, ya que entre dos personas siempre deberá haber un trabajo en medio (para el caso de coautores).
 
-En la figura \ref{fig:camino_corto} se muestra la respuesta (mostrada en un formato que facilita su lectura) que se obtiene al realizar la consulta para obtener la respuesta del camino más corto entre los autores de este trabajo.
+En la figura \ref{fig:camino_corto} se muestra la respuesta (en un formato que facilita su lectura) que se obtiene al realizar la consulta para obtener el camino más corto entre los autores de este trabajo.
 
 \begin{figure}[b]
 	\centering
 	\includegraphics[width=\linewidth]{imagenes/camino_corto.png}
-	\caption{Ejemplo de respuesta a la consulta ``Cuál es el camino más corto entre una persona A (graciana castro) y una persona B (julian o'flaherty)''.}
+	\caption{Ejemplo de respuesta a la consulta: ``Cuál es el camino más corto entre una persona A (graciana castro) y una persona B (julian o'flaherty)''.}
 	\label{fig:camino_corto}
 \end{figure}
 
 \subsection{Análisis de centralidad}
-En esta sección se presentan las consultas implementadas para el análisis de centralidad del grafo. Para esta tarea, se realizó una proyección del grafo, generando un subgrafo de personas. Esto simplifica la tarea realizada en la última consulta presentada en la sección anterior, en la que para hallar el camino entre dos personas se debía pasar por sus trabajos. En este nuevo grafo, las personas quedan conectadas entre sí. Para esto, debe realizarse la siguiente consulta:
+En esta sección se presentan las consultas implementadas para el análisis de centralidad del grafo. Para esta tarea, se realizó una proyección del grafo, generando un subgrafo con nodos únicamente del tipo \texttt{Person}. Esto simplifica la tarea realizada en la última consulta presentada en la sección anterior, en la que para hallar el camino entre dos personas se debía pasar por sus trabajos. En este nuevo grafo, las personas quedan conectadas entre sí directamente. Para esto, debe realizarse la siguiente consulta:
 
-\begin{sflisting}[style=sparql,caption= Consulta para obtener la proyección del grafo de personas,label=codigo2]
-	MATCH (p1:Person)-[:AUTHOR_OF|CONTRIBUTOR_OF]->(w:Work)<-[:AUTHOR_OF|CONTRIBUTOR_OF]-(p2:Person)
+\begin{sflisting}[style=sparql,caption= Consulta para obtener la proyección del grafo de personas,label=subgrafo]
+	MATCH (p1:Person)-[:AUTHOR_OF|CONTRIBUTOR_OF]->(w:Work)
+	<-[:AUTHOR_OF|CONTRIBUTOR_OF]-(p2:Person)
 	WHERE p1 < p2
 	WITH p1 as source, p2 as target, count(w) as weight
 	WITH gds.graph.project(
@@ -271,15 +271,15 @@ En esta sección se presentan las consultas implementadas para el análisis de c
 	{relationshipProperties: {weight: weight}},
 	{undirectedRelationshipTypes: ['*']}
 	) as g
-	RETURN g.graphName AS graph, g.nodeCount AS nodes, g.relationshipCount AS rels
+	RETURN g.graphName AS graph, g.nodeCount
+	AS nodes, g.relationshipCount AS rels
 \end{sflisting}
-
 
 \subsubsection{Centralidad de Intermediación}
 
-La centralidad de Intermediación mide la importancia de un nodo en una red, considerando la cantidad de veces que ese nodo aparece en \textit{el camino más corto entre dos personas}. Los nodos con alta centralidad actúan como puentes entre distintas partes del grafo y demuestran fuerte influencia dentro de la comunidad. Con la siguiente consulta, se obtienen las diez personas con mayor medida de centralidad entre nodos.
+La centralidad de intermediación mide la importancia de un nodo en una red, considerando la cantidad de veces que ese nodo aparece en \textit{el camino más corto entre otras dos personas}. Los nodos con alta centralidad actúan como puentes entre distintas partes del grafo y demuestran una fuerte influencia dentro de la comunidad. Con la siguiente consulta, se obtienen las diez personas con mayor medida de centralidad entre nodos.
 
-\begin{sflisting}[style=sparql,caption= Centralidad de Intermediación,label=codigo2]
+\begin{sflisting}[style=sparql,caption= Centralidad de Intermediación,label=intermediacion]
 	CALL gds.betweenness.stream('coauthor-graph')
 	YIELD nodeId, score
 	RETURN gds.util.asNode(nodeId).normalized_name
@@ -298,9 +298,9 @@ En la figura \ref{fig:intermediacion} se muestra la respuesta a la consulta real
 \end{figure}
 
 \subsubsection{Centralidad de Cercanía}
-La centralidad de cercanía mide qué tan cerca está un determinado nodo del resto de los nodos del grafo. Es importante tener en cuenta que el cálculo de la centralidad de cercanía puede fallar si hay partes del nodo no conectadas, dado que en ese caso la distancia es infinita. Para evitar este problema, se utiliza la normalización de \textit{Wasserman-Faust} que hace que solo se consideren los nodos alcanzables y luego normaliza el resultado por el tamaño de la componente alcanzada. Para el cálculo de esta centralidad, se realiza la siguiente consulta:
+La centralidad de cercanía mide qué tan cerca está un determinado nodo del resto de los nodos del grafo. Es importante tener en cuenta que el cálculo de la centralidad de cercanía puede fallar si hay partes del grafo no conectadas, dado que en ese caso la distancia es infinita. Para evitar este problema, se utiliza la normalización de \textit{Wasserman-Faust}, que hace que solo se consideren los nodos alcanzables y luego normaliza el resultado por el tamaño de la componente alcanzada. Para el cálculo de esta centralidad, se realiza la siguiente consulta:
 
-\begin{sflisting}[style=sparql,caption= Centralidad de Cercanía,label=codigo2]
+\begin{sflisting}[style=sparql,caption= Centralidad de Cercanía,label=cercania]
 	CALL gds.closeness.stream('coauthor-graph',
 	{useWassermanFaust: true})
 	YIELD nodeId, score
@@ -323,9 +323,9 @@ Los resultados obtenidos se muestran en la figura \ref{fig:cercania}.
 
 La centralidad de grado puede calcularse ponderada o no ponderada. La no ponderada mide qué nodos tienen más alcance. Por su lado, la ponderada mide aquellos nodos con conexiones más fuertes (en el caso del trabajo, las colaboraciones más repetidas).
 
-La consulta para ambos casos es similar. Se muestra a continuación la consulta que se realiza para obtener la centralidad de grado ponderada. Para el caso de la no ponderada, se debe eliminar el parámetro \texttt{{relationshipWeightProperty: 'weight'}}.
+La consulta para ambos casos es similar. A continuación se muestra la consulta que se realiza para obtener la centralidad de grado ponderada. Para el caso de la no ponderada, se debe eliminar el parámetro \texttt{{relationshipWeightProperty: 'weight'}}.
 
-\begin{sflisting}[style=sparql,caption= Centralidad de Grado,label=codigo2]
+\begin{sflisting}[style=sparql,caption= Centralidad de Grado,label=grado_ponderado]
 	CALL gds.degree.stream('coauthor-graph',
 	{relationshipWeightProperty: 'weight'})
 	YIELD nodeId, score
@@ -344,9 +344,9 @@ La respuesta para la centralidad de grado ponderada se muestra en la figura \ref
 	\label{fig:grado_ponderada}
 \end{figure}
 
-\subsubsection{Centralidad de Vector propio}
-La centralidad de vector propio identifica como nodos importantes aquellos nodos conectados a otros nodos importantes. Se muestra la consulta a realizar a continuación y la respuesta en la figura \ref{fig:vector_propio}.
-\begin{sflisting}[style=sparql,caption= Centralidad de Vector Propio,label=codigo2]
+\subsubsection{Centralidad de Vector Propio}
+La centralidad de vector propio identifica como nodos importantes a aquellos nodos conectados a otros nodos importantes. A continuación se muestra la consulta a realizar y la respuesta en la figura \ref{fig:vector_propio}.
+\begin{sflisting}[style=sparql,caption= Centralidad de Vector Propio,label=eigenvector]
 	CALL gds.eigenvector.stream('coauthor-graph')
 	YIELD nodeId, score
 	RETURN gds.util.asNode(nodeId).normalized_name
@@ -358,16 +358,16 @@ La centralidad de vector propio identifica como nodos importantes aquellos nodos
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=\linewidth]{imagenes/eigenvector.png}
-	\caption{Top diez de personas con mayor puntaje de centralidad de de vector propio.}
+	\caption{Top diez de personas con mayor puntaje de centralidad de vector propio.}
 	\label{fig:vector_propio}
 \end{figure}
 
 \subsubsection{\textit{PageRank}}
-\textit{PageRank} es un algoritmo que mide la importancia de un nodo considerando si otros nodos ``votan'' por él. Pero no solo importa la cantidad de votos, sino también la importancia del nodo que vota. El voto de un nodo muy importante tiene mayor peso que el de uno poco importante. Pero también importa cuántos votos da cada nodo. Si un nodo tiene muchas relaciones, cada una de ellas tiene menor peso que la de un nodo con pocas relaciones. En este caso en que el grafo es no dirigido, cuando dos nodo A y B estan relacionados entre sí significa que A vota por B y B vota por A (se toma esa relación como dos relaciones dirigidas).
+\textit{PageRank} es un algoritmo que mide la importancia de un nodo considerando si otros nodos ``votan'' por él. No solo importa la cantidad de votos, sino también la importancia del nodo que vota. El voto de un nodo muy importante tiene mayor peso que el de uno poco importante. También importa cuántos votos da cada nodo; si un nodo tiene muchas relaciones, cada una de ellas tiene menor peso que las de un nodo con pocas relaciones. En este caso, en que el grafo es no dirigido, cuando dos nodos A y B están relacionados entre sí significa que A vota por B y B vota por A (se toma esa relación como dos relaciones dirigidas).
 
-Para obtener el puntaje de PageRank, debe realizarse la siguiente consulta:
+Para obtener el puntaje de PageRank, se debe realizar la siguiente consulta:
 
-\begin{sflisting}[style=sparql,caption= PageRank,label=codigo2]
+\begin{sflisting}[style=sparql,caption= PageRank,label=pagerank]
 	CALL gds.pageRank.stream('coauthor-graph')
 	YIELD nodeId, score
 	RETURN gds.util.asNode(nodeId).normalized_name
@@ -386,23 +386,52 @@ Se muestra en la figura \ref{fig:page_rank} el resultado de la consulta.
 \end{figure}
 
 
+\subsubsection{Conclusiones del Análisis de Centralidad}
+Presentados los distintos algoritmos que se pueden utilizar para obtener medidas de centralidad, se pueden identificar personas muy influyentes en la comunidad científica de la Facultad de Ingeniería. Hay individuos, como Fernando Silveira, Federico Lecumberry y Lorena Etcheverry, que son parte de más de un \textit{ranking} de nodos influyentes, lo que lleva a concluir que son actores importantes en esta base de datos.
 
-\subsubsection{Conclusiones}
-Presentados los distintos algoritmos que se pueden utilizar para obtener medidas de centralidad, se pueden identificar personas muy influyentes en la comunidad científica de la Facultad de Ingeniería. Hay individuos, como Fernando Silveira, Federico Lecumberry y Lorena Etcheverry, que son parte de más de un \textit{ranking} de nodos influyentes, que llevan a concluir que son importantes actores de esta base de datos.
+\subsection{Detección de Comunidades}
+Más allá de medir la importancia individual de los nodos, es posible analizar la estructura grupal de la red. El objetivo de la detección de comunidades es particionar el grafo en clusters o grupos de investigadores con una alta densidad de colaboraciones internas y conexiones más escasas con el exterior. Estos grupos suelen representar laboratorios, áreas temáticas o equipos de investigación consolidados.
 
-\subsection{Identificación de comunidades}
+Al igual que en el análisis de centralidad, los algoritmos de comunidad se ejecutan sobre la proyección del grafo de coautoría, \texttt{coauthor-graph}. En este trabajo se exploraron dos algoritmos populares de la librería GDS: Propagación de Etiquetas y Louvain.
 
+\subsubsection{Propagación de Etiquetas (Label Propagation)}
+El algoritmo de Propagación de Etiquetas (LPA) es un método heurístico y muy rápido para encontrar la estructura de comunidad "natural" de un grafo. Inicialmente, cada nodo recibe una etiqueta única (su propia comunidad). Luego, en iteraciones sucesivas, cada nodo adopta la etiqueta más frecuente entre sus vecinos. El proceso continúa hasta que se alcanza un consenso y las etiquetas de los nodos se estabilizan. La consulta para ejecutar este algoritmo es la siguiente:
 
+\begin{sflisting}[style=sparql,caption= Detección de comunidades con Propagación de Etiquetas,label=codigo_lpa]
+	CALL gds.labelPropagation.stream('coauthor-graph', {})
+	YIELD nodeId, communityId
+	RETURN gds.util.asNode(nodeId).normalized_name AS name, communityId
+\end{sflisting}
 
+El resultado asigna un \texttt{communityId} a cada persona, agrupando a los investigadores en sus respectivos clusters de colaboración.
 
+\subsubsection{Algoritmo de Louvain}
+El método de Louvain es uno de los algoritmos de detección de comunidades más utilizados debido a su eficacia y escalabilidad. Su objetivo es optimizar una métrica llamada \textit{modularidad}, la cual mide la calidad de una partición del grafo. Una alta modularidad indica que la densidad de las conexiones dentro de las comunidades es significativamente mayor que la que se esperaría en una red aleatoria con la misma distribución de grados.
 
+Aunque la consulta se muestra en su forma no ponderada, Louvain puede utilizar la propiedad \texttt{weight} de las relaciones (el número de trabajos en común) para que las colaboraciones más fuertes tengan más influencia en la definición de las comunidades, lo que suele producir resultados más significativos.
+
+\begin{sflisting}[style=sparql,caption= Detección de comunidades con el algoritmo de Louvain,label=codigo_louvain]
+	CALL gds.louvain.stream('coauthor-graph', {})
+	YIELD nodeId, communityId
+	RETURN gds.util.asNode(nodeId).normalized_name
+	AS name, communityId
+\end{sflisting}
+
+Al igual que con Propagación de Etiquetas, esta consulta asigna un \texttt{communityId} a cada investigador, pero esta vez la partición del grafo se realiza según el criterio de máxima modularidad, identificando los grupos de colaboración más robustos. En la figura \ref{fig:comunidades} se muestran dos ejemplos de comunidades encontradas. Se pueden identificar en cada una de ellas docentes del Instituto de Ingeniería Eléctrica que son parte del mismo departamento. Además, se encuentran otros investigadores que forman parte de otros departamentos, generando una comunidad interdisciplinaria.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\linewidth]{imagenes/comunidades.png}
+	\caption{Ejemplo de dos comunidades encontradas con el Algoritmo de Louvain.}
+	\label{fig:comunidades}
+\end{figure}
 
 
 \section{Conclusiones y Trabajo Futuro}
 \label{conclusion}
 Este proyecto demostró que el modelado de la producción académica de la Facultad de Ingeniería en una base de datos de grafos es una aproximación factible y potente. La integración de fuentes como Colibrí y OpenAlex en un único grafo resultó ser una solución eficaz para centralizar y conectar información, mientras que el uso del lenguaje de consulta \textit{Cypher} otorgó una gran flexibilidad para explorar relaciones complejas, como patrones de coautoría y vínculos temáticos, de una manera ágil e intuitiva.
 
-El trabajo en su conjunto constituye una sólida prueba de concepto. Aunque el estudio se limitó a tres institutos, la arquitectura del sistema está diseñada para crecer. Posibles líneas de trabajo futuro son: expandir el grafo para incluir a todos los investigadores de la Facultad, e incorporar nuevas entidades como filiación para identificar colaboraciones interinstitucionales. Estos pasos permitirían transformar el prototipo actual en un recurso analítico de gran valor estratégico para la institución.
+El trabajo en su conjunto constituye una sólida prueba de concepto. Aunque el estudio se limitó a los individuos de la Facultad, la arquitectura del sistema está diseñada para crecer. Posibles líneas de trabajo futuro son: expandir el grafo para incluir a todos los investigadores de la Facultad e incorporar nuevas entidades como filiación para identificar colaboraciones interinstitucionales. Estos pasos permitirían transformar el prototipo actual en un recurso analítico de gran valor estratégico para la institución.
 
 %\bibliographystyle{plainnat}
 \bibliographystyle{IEEEtran}
