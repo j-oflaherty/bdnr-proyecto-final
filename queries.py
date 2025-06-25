@@ -15,6 +15,7 @@ class UdegraphQueries:
         return """
         MATCH (n)
         RETURN n
+        LIMIT 2
         """
 
     def get_all_people_query(self):
@@ -159,52 +160,52 @@ if __name__ == "__main__":
     query = UdegraphQueries()
 
     with query.driver.session() as session:
-        # 1. Person with most works
-        print("🔹 Person with the most works:")
-        result = session.run(query.get_person_with_most_works_query())
-        for record in result:
-            person = record["p"]
-            name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
-            print(f"  Name: {name}")
-            print(f"  Number of works: {record['works_count']}")
-        print()
+        # # 1. Person with most works
+        # print("🔹 Person with the most works:")
+        # result = session.run(query.get_person_with_most_works_query())
+        # for record in result:
+        #     person = record["p"]
+        #     name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
+        #     print(f"  Name: {name}")
+        #     print(f"  Number of works: {record['works_count']}")
+        # print()
 
-        # 2. Work with most authors
-        print("🔹 Work with the most authors:")
-        result = session.run(query.get_works_with_most_authors_query())
-        for record in result:
-            work = record["w"]
-            title = work.get("title", work.get("normalized_title", "Unknown"))
-            print(f"  Title: {title}")
-            print(f"  Number of authors: {record['authors_count']}")
-            if "abstract" in work:
-                print(f"  Abstract: {work['abstract']}")
-        print()
+        # # 2. Work with most authors
+        # print("🔹 Work with the most authors:")
+        # result = session.run(query.get_works_with_most_authors_query())
+        # for record in result:
+        #     work = record["w"]
+        #     title = work.get("title", work.get("normalized_title", "Unknown"))
+        #     print(f"  Title: {title}")
+        #     print(f"  Number of authors: {record['authors_count']}")
+        #     if "abstract" in work:
+        #         print(f"  Abstract: {work['abstract']}")
+        # print()
 
-        # 3. Person with most tutored students
-        print("🔹 Person with the most tutored students:")
-        result = session.run(query.get_person_with_most_tutored_students_query())
-        for record in result:
-            person = record["p"]
-            name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
-            print(f"  Name: {name}")
-            print(f"  Number of tutored students: {record['students_count']}")
-        print()
+        # # 3. Person with most tutored students
+        # print("🔹 Person with the most tutored students:")
+        # result = session.run(query.get_person_with_most_tutored_students_query())
+        # for record in result:
+        #     person = record["p"]
+        #     name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
+        #     print(f"  Name: {name}")
+        #     print(f"  Number of tutored students: {record['students_count']}")
+        # print()
 
-        # 4. Person with most coauthors
-        print("🔹 Person with the most coauthors:")
-        result = session.run(query.get_person_with_most_coauthors_query())
-        for record in result:
-            person = record["p"]
-            name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
-            print(f"  Name: {name}")
-            print(f"  Number of coauthors: {record['coauthors_count']}")
-        print()
+        # # 4. Person with most coauthors
+        # print("🔹 Person with the most coauthors:")
+        # result = session.run(query.get_person_with_most_coauthors_query())
+        # for record in result:
+        #     person = record["p"]
+        #     name = person.get("aliases", [person.get("normalized_name", "Unknown")])[0]
+        #     print(f"  Name: {name}")
+        #     print(f"  Number of coauthors: {record['coauthors_count']}")
+        # print()
 
         # 5. Path between two people: Graciana Castro and Julian O'Flaherty
         person1 = "graciana castro"
         person2 = "julian o'flaherty"
-        print(f"🔹 Shortest path between {person1} and {person2}:")
+        print(f"🔹 Camino más corto entre {person1} y {person2}:")
         result = session.run(
             query.get_shortest_paths_between_people_query(
                 person1, person2, max_length=30
@@ -215,70 +216,77 @@ if __name__ == "__main__":
 
         if path_record:
             path_object = path_record["path"]
-            print(f"Path length: {len(path_object.relationships)}")
-
-            grados_separacion = len(path_object.relationships) / 2
-            print(f"Separation grades: {int(grados_separacion)}")
 
             print_collaboration_path(path_object)
+
+            print(f"Largo del camino: {len(path_object.relationships)}")
+
+            grados_separacion = len(path_object.relationships) / 2
+            print(f"Grados de separación: {int(grados_separacion)}")
 
         else:
             print(f"No path was found between '{person1}' and '{person2}'.")
         print()
 
-        # 6. Get works by a specific person
-        person_name = "julian o'flaherty"
-        print(f"🔹 Works by {person_name}:")
-        result = session.run(
-            query.get_person_works_query(person_name), {"person_name": person_name}
-        )
-        for record in result:
-            work = record["w"]
-            title = work.get("title", work.get("normalized_title", "Unknown"))
-            print(f"  Title: {title}")
-            if "abstract" in work:
-                print(f"  Abstract: {work['abstract']}")
-        print()
+        # # 6. Get works by a specific person
+        # person_name = "julian o'flaherty"
+        # print(f"🔹 Works by {person_name}:")
+        # result = session.run(
+        #     query.get_person_works_query(person_name), {"person_name": person_name}
+        # )
+        # for record in result:
+        #     work = record["w"]
+        #     title = work.get("title", work.get("normalized_title", "Unknown"))
+        #     print(f"  Title: {title}")
+        #     if "abstract" in work:
+        #         print(f"  Abstract: {work['abstract']}")
+        # print()
 
-        # 7. Get number of works by type
-        print("🔹 Number of works by type:")
-        result = session.run(query.get_number_of_works_by_type_query())
-        for record in result:
-            work_type = record["wt"]["type"]
-            works_count = record["works_count"]
-            print(f"  Work Type: {work_type}, Number of Works: {works_count}")
-        print()
+        # # 7. Get number of works by type
+        # print("🔹 Number of works by type:")
+        # result = session.run(query.get_number_of_works_by_type_query())
+        # for record in result:
+        #     work_type = record["wt"]["type"]
+        #     works_count = record["works_count"]
+        #     print(f"  Work Type: {work_type}, Number of Works: {works_count}")
+        # print()
 
-        # 8. Get top 20 most used keywords
-        print("🔹 Top 20 most used keywords:")
-        result = session.run(query.get_top_keywords_query())
-        for record in result:
-            keyword = record["k"]["keyword"]
-            works_count = record["works_count"]
-            print(f"  Keyword: {keyword}, Number of Works: {works_count}")
-        print()
+        # # 8. Get top 20 most used keywords
+        # print("🔹 Top 20 most used keywords:")
+        # result = session.run(query.get_top_keywords_query())
+        # for record in result:
+        #     keyword = record["k"]["keyword"]
+        #     works_count = record["works_count"]
+        #     print(f"  Keyword: {keyword}, Number of Works: {works_count}")
+        # print()
 
-        # 9. Get top 10 duos
-        print("🔹 Top 10 duos:")
-        result = session.run(query.get_top_duos_query())
-        for record in result:
-            person1 = record["person1"]
-            person2 = record["person2"]
-            collaborations = record["collaborations"]
-            print(f"  Duo: {person1} & {person2}, Collaborations: {collaborations}")
-        print()
+        # # 9. Get top 10 duos
+        # print("🔹 Top 10 duos:")
+        # result = session.run(query.get_top_duos_query())
+        # for record in result:
+        #     person1 = record["person1"]
+        #     person2 = record["person2"]
+        #     collaborations = record["collaborations"]
+        #     print(f"  Duo: {person1} & {person2}, Collaborations: {collaborations}")
+        # print()
 
-        # 10. Get coauthors of a specific person
-        person_name = "daniel bia"
-        print(f"🔹 Coauthors of {person_name}:")
-        result = session.run(
-            query.get_person_coauthors_query(person_name), {"person_name": person_name}
-        )
+        # # # 10. Get coauthors of a specific person
+        # # person_name = "daniel bia"
+        # # print(f"🔹 Coauthors of {person_name}:")
+        # # result = session.run(
+        # #     query.get_person_coauthors_query(person_name), {"person_name": person_name}
+        # # )
+        # # for record in result:
+        # #     coauthor = record["coauthor"]
+        # #     name = coauthor.get(
+        # #         "aliases", [coauthor.get("normalized_name", "Unknown")]
+        # #     )[0]
+        # #     print(f"  Coauthor: {name}")
+
+        # GET ALL PEOPLE QUERY
+        print("🔹 All people in the graph:")
+        result = session.run(query.get_all_people_query())
         for record in result:
-            coauthor = record["coauthor"]
-            name = coauthor.get(
-                "aliases", [coauthor.get("normalized_name", "Unknown")]
-            )[0]
-            print(f"  Coauthor: {name}")
+            print(record["p"])
 
         query.close()

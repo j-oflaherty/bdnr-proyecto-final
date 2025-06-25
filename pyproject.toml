@@ -68,7 +68,10 @@ follow_imports = "skip"
 follow_imports_for_stubs = true
 
 [tool.uv]
-dev-dependencies = []
+dev-dependencies = [
+    "ipykernel>=6.29.5",
+    "start>=0.2",
+]
 
 [dependency-groups]
 crawlers = ["beautifulsoup4>=4.13.4", "scrapy>=2.13.0"]

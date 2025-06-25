@@ -182,10 +182,221 @@ El desarrollo del sistema enfrentó limitaciones inherentes a las fuentes de dat
 
 \section{Experimentación}
 \label{expe}
+En esta sección se presentan ejemplos de consultas realizadas sobre el grafo, utilizando el lenguaje Cypher que se realizan para validar el modelo y demostrar la utilidad de la base de datos para el análisis de la producción académica. Además, se presenta un pequeño análisis de centralidad del grafo para el cual se implementaron distintos algoritmos y un identificación de comunidades.
 
-\subsection{Consultas}
-Para validar la utilidad del grafo, se diseñaron y ejecutaron diversas consultas en Cypher que responden a preguntas de interés académico. A continuación, se presentan algunos ejemplos representativos.
-%(Aquí se pueden incluir listados de código Cypher y los resultados obtenidos, ya sea en tablas o con visualizaciones).
+\subsection{Consultas relevantes}
+Se muestran a continuación algunos ejemplos de las consultas realizadas sobre el grafo. En este informe se detallarán aquellas consultas que se consideran más relevantes para demostrar la viabilidad y utilidad del grafo. Se encuentra en el repostorio del trabajo\footnote{\url{https://github.com/j-oflaherty/bdnr-proyecto-final}} un conjunto más completo de consultas que se pueden realizar.
+
+\subsubsection{Todos los trabajos de una determinada persona}
+Es de utilidad conocer toda la producción académica de una persona, para conocer cual fue su área de especialización a lo largo de su carrera. Para eso, se puede realizar la consulta mostrada a continuación:
+
+\begin{sflisting}[style=sparql,caption= Obtener los trabajos una persona,label=codigo2]
+	MATCH (p:Person {normalized_name: $person_name})
+	-[:AUTHOR_OF]->(w:Work)
+	RETURN w
+\end{sflisting}
+
+\subsubsection{Persona con mayor cantidad de estudiantes tutoreados}
+Puede ser de interés para estudiantes en búsqueda de tutores para su proyecto final de grado, conocer qué docentes poseen experiencia en la tarea. Para eso, se puede consultar las personas con más estudiantes tutoreados, teniendo en cuenta que se identifican aquellas personas que tutorearon un trabajo con la relación \texttt{CONTRIBUTOR\_OF}. Para obtener el top cinco de docentes con mayor cantidad de estudiantes, se debe realizar la siguiente consulta:
+
+\begin{sflisting}[style=sparql,caption= Docentes con mayor cantidad de estudiantes tutoreados,label=codigo2]
+	MATCH (p:Person)-[:CONTRIBUTOR_OF]->(w:Work)
+	<-[:AUTHOR_OF]-(a:Person)
+	RETURN p, COUNT(DISTINCT a) AS students_count
+	ORDER BY students_count DESC
+	LIMIT 5
+\end{sflisting}
+
+\subsubsection{\textit{Keywords} más frecuentes}
+Identificar las \textit{keywords} más frecuentes puede ser importante para conocer los temas de interés dentro de un centro académico. Para el grafo implementado, esto se puede obtener con la siguiente consulta, con la que se obtienen las veinte \textit{keywords} más utilizadas:
+
+\begin{sflisting}[style=sparql,caption= \textit{Keywords} más frecuentes,label=codigo2]
+	MATCH (w:Work)-[:KEYWORD]->(k:Keyword)
+	WHERE k <> "None"
+	RETURN k, COUNT(w) AS works_count
+	ORDER BY works_count DESC
+	LIMIT 20
+\end{sflisting}
+
+Corriendo la consulta, se observa que dos de los conceptos que más aparecen son \textbf{aprendizaje automático} y \textit{\textbf{machine learning}}, que muestra la importancia que tiene esta área para la Facultad de Ingeniería.
+
+\subsubsection{Dúo dinámico}
+En este caso, la consulta implementada responde la pregunta: ¿quiénes son las diez parejas con mayor producción académica en conjunto?
+
+\begin{sflisting}[style=sparql,caption= Parejas con mayor cantidad de artículos publicados en conjunto,label=codigo2]
+	MATCH (p1:Person)-[]->(w:Work)<-[]-(p2:Person)
+	WHERE elementId(p1) < elementId(p2)
+	RETURN p1.normalized_name as person1,
+	p2.normalized_name as person2,
+	count(w) as collaborations
+	ORDER BY collaborations DESC
+	LIMIT 10
+\end{sflisting}
+
+\subsubsection{Camino más corto entre dos personas}
+Para analizar a una comunidad y sus actores, también es util poder identificar el camino que hay entre dos de ellos. En este caso, las personas están vinculadas a través de los trabajos de los que fueron parte, ya sea como autores o como tutores. Para esto, se implementó la siguiente consulta que devuelve el camino más corto entre dos personas:
+
+\begin{sflisting}[style=sparql,caption= Parejas con mayor cantidad de artículos publicados en conjunto,label=codigo2]
+	MATCH
+	(p1:Person {{normalized_name: $person1}}),
+	(p2:Person {{normalized_name: $person2}}),
+	path = shortestPath(
+	(p1)-[:AUTHOR_OF|CONTRIBUTOR_OF*1..{max_length}]-(p2)
+	)
+	RETURN path
+\end{sflisting}
+
+La respuesta muestra un camino intercalado de personas y trabajos. El largo mínimo de camino será uno, ya que entre dos personas siempre deberá haber un trabajo entre medio (para el caso de coautores).
+
+En la figura \ref{fig:camino_corto} se muestra la respuesta (mostrada en un formato que facilita su lectura) que se obtiene al realizar la consulta para obtener la respuesta del camino más corto entre los autores de este trabajo.
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=\linewidth]{imagenes/camino_corto.png}
+	\caption{Ejemplo de respuesta a la consulta ``Cuál es el camino más corto entre una persona A (graciana castro) y una persona B (julian o'flaherty)''.}
+	\label{fig:camino_corto}
+\end{figure}
+
+\subsection{Análisis de centralidad}
+En esta sección se presentan las consultas implementadas para el análisis de centralidad del grafo. Para esta tarea, se realizó una proyección del grafo, generando un subgrafo de personas. Esto simplifica la tarea realizada en la última consulta presentada en la sección anterior, en la que para hallar el camino entre dos personas se debía pasar por sus trabajos. En este nuevo grafo, las personas quedan conectadas entre sí. Para esto, debe realizarse la siguiente consulta:
+
+\begin{sflisting}[style=sparql,caption= Consulta para obtener la proyección del grafo de personas,label=codigo2]
+	MATCH (p1:Person)-[:AUTHOR_OF|CONTRIBUTOR_OF]->(w:Work)<-[:AUTHOR_OF|CONTRIBUTOR_OF]-(p2:Person)
+	WHERE p1 < p2
+	WITH p1 as source, p2 as target, count(w) as weight
+	WITH gds.graph.project(
+	'coauthor-graph',
+	source,
+	target,
+	{relationshipProperties: {weight: weight}},
+	{undirectedRelationshipTypes: ['*']}
+	) as g
+	RETURN g.graphName AS graph, g.nodeCount AS nodes, g.relationshipCount AS rels
+\end{sflisting}
+
+
+\subsubsection{Centralidad de Intermediación}
+
+La centralidad de Intermediación mide la importancia de un nodo en una red, considerando la cantidad de veces que ese nodo aparece en \textit{el camino más corto entre dos personas}. Los nodos con alta centralidad actúan como puentes entre distintas partes del grafo y demuestran fuerte influencia dentro de la comunidad. Con la siguiente consulta, se obtienen las diez personas con mayor medida de centralidad entre nodos.
+
+\begin{sflisting}[style=sparql,caption= Centralidad de Intermediación,label=codigo2]
+	CALL gds.betweenness.stream('coauthor-graph')
+	YIELD nodeId, score
+	RETURN gds.util.asNode(nodeId).normalized_name
+	AS name, score
+	ORDER BY score DESC
+	LIMIT 10
+\end{sflisting}
+
+En la figura \ref{fig:intermediacion} se muestra la respuesta a la consulta realizada.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\linewidth]{imagenes/intermediacion.png}
+	\caption{Top diez de personas con mayor puntaje de centralidad de intermediación.}
+	\label{fig:intermediacion}
+\end{figure}
+
+\subsubsection{Centralidad de Cercanía}
+La centralidad de cercanía mide qué tan cerca está un determinado nodo del resto de los nodos del grafo. Es importante tener en cuenta que el cálculo de la centralidad de cercanía puede fallar si hay partes del nodo no conectadas, dado que en ese caso la distancia es infinita. Para evitar este problema, se utiliza la normalización de \textit{Wasserman-Faust} que hace que solo se consideren los nodos alcanzables y luego normaliza el resultado por el tamaño de la componente alcanzada. Para el cálculo de esta centralidad, se realiza la siguiente consulta:
+
+\begin{sflisting}[style=sparql,caption= Centralidad de Cercanía,label=codigo2]
+	CALL gds.closeness.stream('coauthor-graph',
+	{useWassermanFaust: true})
+	YIELD nodeId, score
+	RETURN gds.util.asNode(nodeId).normalized_name
+	AS name, score
+	ORDER BY score DESC
+	LIMIT 10
+\end{sflisting}
+
+Los resultados obtenidos se muestran en la figura \ref{fig:cercania}.
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=\linewidth]{imagenes/cercanía.png}
+	\caption{Top diez de personas con mayor puntaje de centralidad de cercanía.}
+	\label{fig:cercania}
+\end{figure}
+
+\subsubsection{Centralidad de Grado}
+
+La centralidad de grado puede calcularse ponderada o no ponderada. La no ponderada mide qué nodos tienen más alcance. Por su lado, la ponderada mide aquellos nodos con conexiones más fuertes (en el caso del trabajo, las colaboraciones más repetidas).
+
+La consulta para ambos casos es similar. Se muestra a continuación la consulta que se realiza para obtener la centralidad de grado ponderada. Para el caso de la no ponderada, se debe eliminar el parámetro \texttt{{relationshipWeightProperty: 'weight'}}.
+
+\begin{sflisting}[style=sparql,caption= Centralidad de Grado,label=codigo2]
+	CALL gds.degree.stream('coauthor-graph',
+	{relationshipWeightProperty: 'weight'})
+	YIELD nodeId, score
+	RETURN gds.util.asNode(nodeId).normalized_name AS name,
+	score AS centrality_measure
+	ORDER BY centrality_measure DESC, name DESC
+	LIMIT 10
+\end{sflisting}
+
+La respuesta para la centralidad de grado ponderada se muestra en la figura \ref{fig:grado_ponderada}.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\linewidth]{imagenes/pesos_grado.png}
+	\caption{Top diez de personas con mayor puntaje de centralidad de grado ponderada.}
+	\label{fig:grado_ponderada}
+\end{figure}
+
+\subsubsection{Centralidad de Vector propio}
+La centralidad de vector propio identifica como nodos importantes aquellos nodos conectados a otros nodos importantes. Se muestra la consulta a realizar a continuación y la respuesta en la figura \ref{fig:vector_propio}.
+\begin{sflisting}[style=sparql,caption= Centralidad de Vector Propio,label=codigo2]
+	CALL gds.eigenvector.stream('coauthor-graph')
+	YIELD nodeId, score
+	RETURN gds.util.asNode(nodeId).normalized_name
+	AS name, score AS eigenvector
+	ORDER BY eigenvector DESC
+	LIMIT 10
+\end{sflisting}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\linewidth]{imagenes/eigenvector.png}
+	\caption{Top diez de personas con mayor puntaje de centralidad de de vector propio.}
+	\label{fig:vector_propio}
+\end{figure}
+
+\subsubsection{\textit{PageRank}}
+\textit{PageRank} es un algoritmo que mide la importancia de un nodo considerando si otros nodos ``votan'' por él. Pero no solo importa la cantidad de votos, sino también la importancia del nodo que vota. El voto de un nodo muy importante tiene mayor peso que el de uno poco importante. Pero también importa cuántos votos da cada nodo. Si un nodo tiene muchas relaciones, cada una de ellas tiene menor peso que la de un nodo con pocas relaciones. En este caso en que el grafo es no dirigido, cuando dos nodo A y B estan relacionados entre sí significa que A vota por B y B vota por A (se toma esa relación como dos relaciones dirigidas).
+
+Para obtener el puntaje de PageRank, debe realizarse la siguiente consulta:
+
+\begin{sflisting}[style=sparql,caption= PageRank,label=codigo2]
+	CALL gds.pageRank.stream('coauthor-graph')
+	YIELD nodeId, score
+	RETURN gds.util.asNode(nodeId).normalized_name
+	AS name, score AS pageRank
+	ORDER BY pageRank DESC
+	LIMIT 10
+\end{sflisting}
+
+Se muestra en la figura \ref{fig:page_rank} el resultado de la consulta.
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=\linewidth]{imagenes/pagerank.png}
+	\caption{Top diez de personas con mayor puntaje por el algoritmo \textit{PageRank}.}
+	\label{fig:page_rank}
+\end{figure}
+
+
+
+\subsubsection{Conclusiones}
+Presentados los distintos algoritmos que se pueden utilizar para obtener medidas de centralidad, se pueden identificar personas muy influyentes en la comunidad científica de la Facultad de Ingeniería. Hay individuos, como Fernando Silveira, Federico Lecumberry y Lorena Etcheverry, que son parte de más de un \textit{ranking} de nodos influyentes, que llevan a concluir que son importantes actores de esta base de datos.
+
+\subsection{Identificación de comunidades}
+
+
+
+
+
+
 
 \section{Conclusiones y Trabajo Futuro}
 \label{conclusion}
