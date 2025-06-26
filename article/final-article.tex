@@ -165,7 +165,7 @@ OpenAlex~\cite{Priem2022OpenAlex} es un índice que colecta información de publ
 \subsection{Modelado y Carga del Grafo}
 Para el modelado se optó por un grafo de propiedades, gestionado con la base de datos Neo4j. En este modelo, los nodos representan entidades (Personas, Trabajos, Tipos de Trabajo y Palabras Clave) y las relaciones modelan los vínculos entre ellas (autoría, contribución, tipo y palabra clave). La Figura~\ref{fig:grafo} ilustra el esquema del grafo implementado.
 
-\begin{figure}[h]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.6\linewidth]{imagenes/grafo.png}
 	\caption{Esquema del grafo de propiedades implementado.}
@@ -179,6 +179,8 @@ La carga de los datos se automatizó mediante scripts de Python que utilizan la 
 \subsection{Limitaciones}
 El desarrollo del sistema enfrentó limitaciones inherentes a las fuentes de datos y al alcance del proyecto. La cobertura de Colibrí no es exhaustiva y presenta inconsistencias en sus metadatos. Aunque la integración con OpenAlex mitigó parcialmente este problema, la correspondencia entre registros no siempre fue directa. Finalmente, la implementación se realizó sobre una instancia local de Neo4j, con las consiguientes restricciones de escalabilidad. Estas limitaciones abren claras oportunidades para trabajo futuro, como la ampliación del conjunto de datos y la mejora de los procesos de limpieza y normalización.
 
+Otra limitante es que el grafo actualmente no incluye información temporal sobre los trabajos, por lo que no pueden evaluarse tendencias o evoluciones en la producción académica.
+
 \section{Experimentación}
 \label{expe}
 En esta sección se presentan ejemplos de consultas realizadas sobre el grafo, utilizando el lenguaje Cypher, realizadas para validar el modelo y demostrar la utilidad de la base de datos para el análisis de la producción académica. Además, se presenta un análisis de centralidad del grafo y de detección de comunidades.
@@ -190,7 +192,7 @@ A continuación se muestran algunos ejemplos de las consultas realizadas sobre e
 Es de utilidad conocer toda la producción académica de una persona, para conocer cuál fue su área de especialización a lo largo de su carrera. Para eso, se puede realizar la consulta mostrada a continuación:
 
 \begin{sflisting}[style=sparql,caption= Obtener los trabajos de una persona,label=trabajos_persona]
-	MATCH (p:Person {normalized_name: $person_name})
+	MATCH (p:Person {normalized_name: \$person_name})
 	-[:AUTHOR_OF]->(w:Work)
 	RETURN w
 \end{sflisting}
@@ -237,8 +239,8 @@ Para analizar una comunidad y sus actores, también es útil poder identificar e
 
 \begin{sflisting}[style=sparql,caption= Camino más corto entre dos personas,label=camino_corto]
 	MATCH
-	(p1:Person {{normalized_name: $person1}}),
-	(p2:Person {{normalized_name: $person2}}),
+	(p1:Person {normalized_name: \$person1}),
+	(p2:Person {normalized_name: \$person2}),
 	path = shortestPath(
 	(p1)-[:AUTHOR_OF|CONTRIBUTOR_OF*1..{max_length}]-(p2)
 	)
@@ -249,7 +251,7 @@ La respuesta muestra un camino intercalado de personas y trabajos. La longitud m
 
 En la figura \ref{fig:camino_corto} se muestra la respuesta (en un formato que facilita su lectura) que se obtiene al realizar la consulta para obtener el camino más corto entre los autores de este trabajo.
 
-\begin{figure}[b]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=\linewidth]{imagenes/camino_corto.png}
 	\caption{Ejemplo de respuesta a la consulta: ``Cuál es el camino más corto entre una persona A (graciana castro) y una persona B (julian o'flaherty)''.}
@@ -257,7 +259,8 @@ En la figura \ref{fig:camino_corto} se muestra la respuesta (en un formato que f
 \end{figure}
 
 \subsection{Análisis de centralidad}
-En esta sección se presentan las consultas implementadas para el análisis de centralidad del grafo. Para esta tarea, se realizó una proyección del grafo, generando un subgrafo con nodos únicamente del tipo \texttt{Person}. Esto simplifica la tarea realizada en la última consulta presentada en la sección anterior, en la que para hallar el camino entre dos personas se debía pasar por sus trabajos. En este nuevo grafo, las personas quedan conectadas entre sí directamente. Para esto, debe realizarse la siguiente consulta:
+En esta sección se presentan las consultas implementadas para el análisis de centralidad del grafo. Para esta tarea, se utilizó el plugin de \textit{graph-data-science}, con el cual se realizó una proyección del grafo con nodos únicamente del tipo \texttt{Person} conectadas entre sí cuando trabajaron en un trabajo en común, con peso igual a la cantidad de trabajos en común.
+Esto simplifica la tarea realizada en la última consulta presentada en la sección anterior, en la que para hallar el camino entre dos personas se debía pasar por sus trabajos. En este nuevo grafo, las personas quedan conectadas entre sí directamente. Para esto, debe realizarse la siguiente consulta:
 
 \begin{sflisting}[style=sparql,caption= Consulta para obtener la proyección del grafo de personas,label=subgrafo]
 	MATCH (p1:Person)-[:AUTHOR_OF|CONTRIBUTOR_OF]->(w:Work)
@@ -265,11 +268,11 @@ En esta sección se presentan las consultas implementadas para el análisis de c
 	WHERE p1 < p2
 	WITH p1 as source, p2 as target, count(w) as weight
 	WITH gds.graph.project(
-	'coauthor-graph',
-	source,
-	target,
-	{relationshipProperties: {weight: weight}},
-	{undirectedRelationshipTypes: ['*']}
+		'coauthor-graph',
+		source,
+		target,
+		{relationshipProperties: {weight: weight}},
+		{undirectedRelationshipTypes: ['*']}
 	) as g
 	RETURN g.graphName AS graph, g.nodeCount
 	AS nodes, g.relationshipCount AS rels
@@ -290,7 +293,7 @@ La centralidad de intermediación mide la importancia de un nodo en una red, con
 
 En la figura \ref{fig:intermediacion} se muestra la respuesta a la consulta realizada.
 
-\begin{figure}[t]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=\linewidth]{imagenes/intermediacion.png}
 	\caption{Top diez de personas con mayor puntaje de centralidad de intermediación.}
@@ -312,7 +315,7 @@ La centralidad de cercanía mide qué tan cerca está un determinado nodo del re
 
 Los resultados obtenidos se muestran en la figura \ref{fig:cercania}.
 
-\begin{figure}[b]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=\linewidth]{imagenes/cercanía.png}
 	\caption{Top diez de personas con mayor puntaje de centralidad de cercanía.}
@@ -337,7 +340,7 @@ La consulta para ambos casos es similar. A continuación se muestra la consulta 
 
 La respuesta para la centralidad de grado ponderada se muestra en la figura \ref{fig:grado_ponderada}.
 
-\begin{figure}[t]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=\linewidth]{imagenes/pesos_grado.png}
 	\caption{Top diez de personas con mayor puntaje de centralidad de grado ponderada.}
@@ -355,7 +358,7 @@ La centralidad de vector propio identifica como nodos importantes a aquellos nod
 	LIMIT 10
 \end{sflisting}
 
-\begin{figure}[t]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=\linewidth]{imagenes/eigenvector.png}
 	\caption{Top diez de personas con mayor puntaje de centralidad de vector propio.}
@@ -378,7 +381,7 @@ Para obtener el puntaje de PageRank, se debe realizar la siguiente consulta:
 
 Se muestra en la figura \ref{fig:page_rank} el resultado de la consulta.
 
-\begin{figure}[b]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=\linewidth]{imagenes/pagerank.png}
 	\caption{Top diez de personas con mayor puntaje por el algoritmo \textit{PageRank}.}
@@ -400,7 +403,8 @@ El algoritmo de Propagación de Etiquetas (LPA) es un método heurístico y muy 
 \begin{sflisting}[style=sparql,caption= Detección de comunidades con Propagación de Etiquetas,label=codigo_lpa]
 	CALL gds.labelPropagation.stream('coauthor-graph', {})
 	YIELD nodeId, communityId
-	RETURN gds.util.asNode(nodeId).normalized_name AS name, communityId
+	RETURN gds.util.asNode(nodeId).normalized_name AS name,
+		communityId AS community_id
 \end{sflisting}
 
 El resultado asigna un \texttt{communityId} a cada persona, agrupando a los investigadores en sus respectivos clusters de colaboración.
@@ -419,7 +423,7 @@ Aunque la consulta se muestra en su forma no ponderada, Louvain puede utilizar l
 
 Al igual que con Propagación de Etiquetas, esta consulta asigna un \texttt{communityId} a cada investigador, pero esta vez la partición del grafo se realiza según el criterio de máxima modularidad, identificando los grupos de colaboración más robustos. En la figura \ref{fig:comunidades} se muestran dos ejemplos de comunidades encontradas. Se pueden identificar en cada una de ellas docentes del Instituto de Ingeniería Eléctrica que son parte del mismo departamento. Además, se encuentran otros investigadores que forman parte de otros departamentos, generando una comunidad interdisciplinaria.
 
-\begin{figure}[t]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=\linewidth]{imagenes/comunidades.png}
 	\caption{Ejemplo de dos comunidades encontradas con el Algoritmo de Louvain.}
