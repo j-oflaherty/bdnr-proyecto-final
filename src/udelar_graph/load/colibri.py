@@ -20,6 +20,15 @@ from udelar_graph.repository import UdelarGraphRepository
 
 
 def load_colibri_data(data_dir: Path = Path("data/colibri")) -> pl.DataFrame:
+    """
+    Loads Colibri data from JSONL files in the specified directory, filtering for specific faculties and departments.
+
+    Args:
+        data_dir (Path): The directory containing Colibri JSONL files. Defaults to 'data/colibri'.
+
+    Returns:
+        pl.DataFrame: A Polars DataFrame containing the loaded data.
+    """
     all_paths = data_dir.glob("**/*.jsonl")
     data = []
     for path in all_paths:
@@ -37,6 +46,15 @@ def load_colibri_data(data_dir: Path = Path("data/colibri")) -> pl.DataFrame:
 
 
 def get_works(data: pl.DataFrame) -> list[Work]:
+    """
+    Extracts a list of Work objects from the provided DataFrame.
+
+    Args:
+        data (pl.DataFrame): The DataFrame containing work data.
+
+    Returns:
+        list[Work]: A list of Work objects with normalized title, title, and abstract.
+    """
     works_df = data.select(
         pl.col("normalized_title"),
         pl.col("title"),
@@ -63,6 +81,17 @@ def get_person_to_work_relations(
     rel: Literal["authors", "contributors"],
     people_name_mapping: dict[str, str],
 ) -> list[tuple[Person, Work]]:
+    """
+    Creates a list of (Person, Work) tuples representing relationships (authorship or contribution).
+
+    Args:
+        data (pl.DataFrame): The DataFrame containing work and person data.
+        rel (Literal["authors", "contributors"]): The relationship type to extract.
+        people_name_mapping (dict[str, str]): Mapping from original to normalized person names.
+
+    Returns:
+        list[tuple[Person, Work]]: List of (Person, Work) tuples for the specified relationship.
+    """
     return [
         (
             Person(normalized_name=row["person"]),
@@ -88,6 +117,15 @@ def get_person_to_work_relations(
 
 
 def get_work_types(data: pl.DataFrame) -> list[tuple[Work, WorkType]]:
+    """
+    Extracts work types for each work in the DataFrame.
+
+    Args:
+        data (pl.DataFrame): The DataFrame containing work data.
+
+    Returns:
+        list[tuple[Work, WorkType]]: List of (Work, WorkType) tuples.
+    """
     return [
         (Work(normalized_title=row["normalized_title"]), WorkType(type=row["type"]))
         for row in data.select(
@@ -100,6 +138,16 @@ def get_work_types(data: pl.DataFrame) -> list[tuple[Work, WorkType]]:
 def get_work_keywords(
     data: pl.DataFrame, excluded_keyworks: set[str] = set()
 ) -> list[tuple[Work, WorkKeyword]]:
+    """
+    Extracts keywords for each work, optionally excluding certain keywords.
+
+    Args:
+        data (pl.DataFrame): The DataFrame containing work data.
+        excluded_keyworks (set[str], optional): Set of keywords to exclude. Defaults to empty set.
+
+    Returns:
+        list[tuple[Work, WorkKeyword]]: List of (Work, WorkKeyword) tuples.
+    """
     keywords_df = (
         data.select(
             pl.col("normalized_title"),
@@ -133,6 +181,15 @@ def populate_graph_colibri(
     *,
     extract_missing_names: bool = False,
 ):
+    """
+    Populates the graph database with Colibri data, including people, works, relationships, types, and keywords.
+    Optionally extracts missing names using an external service.
+
+    Args:
+        repository (UdelarGraphRepository): The repository to populate.
+        data_dir (Path, optional): Directory containing Colibri data. Defaults to 'data/colibri'.
+        extract_missing_names (bool, optional): Whether to extract missing names using OpenAI. Defaults to False.
+    """
     data = load_colibri_data(data_dir)
     data = data.with_columns(
         normalized_title=pl.col("title").map_elements(

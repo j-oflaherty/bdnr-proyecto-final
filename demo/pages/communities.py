@@ -184,97 +184,119 @@ st.success(
     f"📊 Graph initialized: {graph_info['nodes']} researchers, {graph_info['rels']} collaborations"
 )
 
-# Sidebar for person search
-st.sidebar.header("🔍 Search Person")
+# Main page search
+st.header("🔍 Find a Researcher's Community")
 person_names = get_all_person_names()
-selected_person = st.sidebar.selectbox(
-    "Find which community a person belongs to:",
+selected_person = st.selectbox(
+    "Search for a person to see their community. Leave unselected to explore all communities.",
     ["Select a person..."] + person_names,
     key="person_search",
 )
 
+
 # Main content
-tab1, tab2 = st.tabs(["🏛️ Louvain Communities", "🏷️ Label Propagation Communities"])
+if selected_person == "Select a person...":
+    st.header("Community Exploration")
+    st.markdown("Browse through the top communities detected by different algorithms.")
+    tab1, tab2 = st.tabs(["🏛️ Louvain Communities", "🏷️ Label Propagation Communities"])
 
-with tab1:
-    st.header("Louvain Algorithm Communities")
-    st.markdown("""
-    The Louvain algorithm optimizes **modularity** to find high-quality communities. 
-    It identifies groups with dense internal connections and sparse external connections.
-    """)
+    with tab1:
+        st.subheader("Louvain Algorithm Communities")
+        st.markdown(
+            """
+        The Louvain algorithm optimizes **modularity** to find high-quality communities. 
+        It identifies groups with dense internal connections and sparse external connections.
+        """
+        )
 
+        with st.spinner("Running Louvain community detection..."):
+            louvain_df, louvain_totals = get_louvain_communities()
+
+        # Display communities
+        st.write(f"📈 Found {len(louvain_totals)} communities")
+
+        # Show top communities
+        top_communities = louvain_totals.head(10)
+
+        for i, (community_id, total_score) in enumerate(top_communities.items()):
+            community_members = louvain_df[louvain_df["communityId"] == community_id]
+            member_count = len(community_members)
+
+            with st.expander(
+                f"🏛️ Community {i + 1} (ID: {community_id}) - {member_count} members (Total Score: {total_score:.1f})"
+            ):
+                display_community_members(louvain_df, community_id)
+
+    with tab2:
+        st.subheader("Label Propagation Algorithm Communities")
+        st.markdown(
+            """
+        Label Propagation is a fast heuristic algorithm where each node adopts the most common 
+        label among its neighbors through iterative updates.
+        """
+        )
+
+        with st.spinner("Running Label Propagation community detection..."):
+            lpa_df, lpa_totals = get_label_propagation_communities()
+
+        # Display communities
+        st.write(f"📈 Found {len(lpa_totals)} communities")
+
+        # Show top communities
+        top_communities = lpa_totals.head(10)
+
+        for i, (community_id, total_score) in enumerate(top_communities.items()):
+            community_members = lpa_df[lpa_df["communityId"] == community_id]
+            member_count = len(community_members)
+
+            with st.expander(
+                f"🏷️ Community {i + 1} (ID: {community_id}) - {member_count} members (Total Score: {total_score:.1f})"
+            ):
+                display_community_members(lpa_df, community_id)
+
+else:
+    st.header(f"Community Details for: {selected_person}")
+
+    # Louvain
     with st.spinner("Running Louvain community detection..."):
         louvain_df, louvain_totals = get_louvain_communities()
 
-    # Display communities
-    st.subheader(f"📈 Found {len(louvain_totals)} communities")
+    louvain_community_id = search_person_community(selected_person, louvain_df)
 
-    # Show top communities
-    top_communities = louvain_totals.head(10)
+    st.markdown("---")
+    st.subheader("🏛️ Louvain Community")
+    if louvain_community_id is not None:
+        community_rank = list(louvain_totals.index).index(louvain_community_id) + 1
+        total_score = louvain_totals[louvain_community_id]
+        member_count = len(
+            louvain_df[louvain_df["communityId"] == louvain_community_id]
+        )
 
-    for i, (community_id, total_score) in enumerate(top_communities.items()):
-        community_members = louvain_df[louvain_df["communityId"] == community_id]
-        member_count = len(community_members)
+        expander_title = f"🏛️ Community {community_rank} (ID: {louvain_community_id}) - {member_count} members (Total Score: {total_score:.1f})"
+        with st.expander(expander_title, expanded=True):
+            display_community_members(louvain_df, louvain_community_id)
+    else:
+        st.error(f"❌ {selected_person} not found in any Louvain community.")
 
-        with st.expander(
-            f"🏛️ Community {i + 1} (ID: {community_id}) - {member_count} members (Total Score: {total_score:.1f})"
-        ):
-            display_community_members(louvain_df, community_id)
-
-    # Search functionality
-    if selected_person != "Select a person...":
-        community_id = search_person_community(selected_person, louvain_df)
-        if community_id is not None:
-            community_rank = list(louvain_totals.index).index(community_id) + 1
-            total_score = louvain_totals[community_id]
-            member_count = len(louvain_df[louvain_df["communityId"] == community_id])
-
-            st.sidebar.success(f"✅ **{selected_person}** belongs to:")
-            st.sidebar.info(f"🏛️ **Community {community_rank}** (ID: {community_id})")
-            st.sidebar.info(f"👥 {member_count} members")
-            st.sidebar.info(f"📊 Total Score: {total_score:.1f}")
-        else:
-            st.sidebar.error(f"❌ {selected_person} not found in communities")
-
-with tab2:
-    st.header("Label Propagation Algorithm Communities")
-    st.markdown("""
-    Label Propagation is a fast heuristic algorithm where each node adopts the most common 
-    label among its neighbors through iterative updates.
-    """)
-
+    # Label Propagation
     with st.spinner("Running Label Propagation community detection..."):
         lpa_df, lpa_totals = get_label_propagation_communities()
 
-    # Display communities
-    st.subheader(f"📈 Found {len(lpa_totals)} communities")
+    lpa_community_id = search_person_community(selected_person, lpa_df)
 
-    # Show top communities
-    top_communities = lpa_totals.head(10)
+    st.markdown("---")
+    st.subheader("🏷️ Label Propagation Community")
+    if lpa_community_id is not None:
+        community_rank = list(lpa_totals.index).index(lpa_community_id) + 1
+        total_score = lpa_totals[lpa_community_id]
+        member_count = len(lpa_df[lpa_df["communityId"] == lpa_community_id])
 
-    for i, (community_id, total_score) in enumerate(top_communities.items()):
-        community_members = lpa_df[lpa_df["communityId"] == community_id]
-        member_count = len(community_members)
+        expander_title = f"🏷️ Community {community_rank} (ID: {lpa_community_id}) - {member_count} members (Total Score: {total_score:.1f})"
+        with st.expander(expander_title, expanded=True):
+            display_community_members(lpa_df, lpa_community_id)
+    else:
+        st.error(f"❌ {selected_person} not found in any Label Propagation community.")
 
-        with st.expander(
-            f"🏷️ Community {i + 1} (ID: {community_id}) - {member_count} members (Total Score: {total_score:.1f})"
-        ):
-            display_community_members(lpa_df, community_id)
-
-    # Search functionality
-    if selected_person != "Select a person...":
-        community_id = search_person_community(selected_person, lpa_df)
-        if community_id is not None:
-            community_rank = list(lpa_totals.index).index(community_id) + 1
-            total_score = lpa_totals[community_id]
-            member_count = len(lpa_df[lpa_df["communityId"] == community_id])
-
-            st.sidebar.success(f"✅ **{selected_person}** belongs to:")
-            st.sidebar.info(f"🏷️ **Community {community_rank}** (ID: {community_id})")
-            st.sidebar.info(f"👥 {member_count} members")
-            st.sidebar.info(f"📊 Total Score: {total_score:.1f}")
-        else:
-            st.sidebar.error(f"❌ {selected_person} not found in communities")
 
 # Footer with algorithm comparison
 st.markdown("---")
