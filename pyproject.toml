@@ -75,6 +75,10 @@ dev-dependencies = [
 
 [dependency-groups]
 crawlers = ["beautifulsoup4>=4.13.4", "scrapy>=2.13.0"]
+demo = [
+    "pyvis>=0.3.2",
+    "streamlit>=1.46.1",
+]
 dev = [
     "dvc>=3.59.2",
     "ipykernel>=6.29.5",
